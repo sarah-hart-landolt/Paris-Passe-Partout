@@ -20,8 +20,8 @@ namespace ParisPassePartout.Data
         public DbSet<Subscription> Subscription { get; set; }
         public DbSet<PostReaction> PostReaction { get; set; }
         public DbSet<Reaction> Reaction { get; set; }
-        //public DbSet<PinList> PinList { get; set; }
-        //public DbSet<PostPinList> PostPinList { get; set; }
+        public DbSet<PinCollection> PinCollection{ get; set; }
+        public DbSet<PostPinCollection> PostPinCollection { get; set; }
 
 
 
