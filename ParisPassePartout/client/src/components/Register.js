@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input, Card, CardBody } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
-
+import "../App.css"
 export default function Register() {
   const history = useHistory();
   const { register } = useContext(UserProfileContext);
@@ -31,7 +31,7 @@ export default function Register() {
   };
 
   return (
-    <div className="container pt-4">
+    <div className="container pt-4 mainContainer">
       <div className="row justify-content-center">
         <Card className="col-sm-12 col-lg-6">
           <CardBody>

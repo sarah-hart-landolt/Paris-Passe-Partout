@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import * as firebase from "firebase/app";
-import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "./index.css";
+import 'font-awesome/css/font-awesome.min.css';
 
 
 const firebaseConfig = {

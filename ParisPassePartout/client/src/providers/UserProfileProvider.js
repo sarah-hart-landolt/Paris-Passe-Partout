@@ -20,6 +20,7 @@ export function UserProfileProvider(props) {
 
   const [userProfiles, setUserProfiles] = useState([]);
 
+
   const [isFirebaseReady, setIsFirebaseReady] = useState(false);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((u) => {
@@ -132,6 +133,17 @@ export function UserProfileProvider(props) {
     );
   };
 
+  const searchProfiles = (searchString) => {
+    return getToken().then((token) =>
+        fetch(`/api/userprofile/search?searchString=${searchString}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => res.json()));
+};
+
   return (
     <UserProfileContext.Provider
       value={{
@@ -145,6 +157,7 @@ export function UserProfileProvider(props) {
         getUserProfiles,
         userProfiles,
         editUserProfile,
+        searchProfiles
       }}
     >
       {isFirebaseReady ? (

@@ -12,10 +12,21 @@ code {
     monospace;
 }
 
-.App {
-  max-height: 736px;
+/* .App {
+  max-height: 736px !important;
   width: 414px;
   margin: auto;
+} */
+
+.navBar{
+  /* max-height: 736px !important;
+  width: 414px; */
+  margin: auto;
+  background-color: steelblue;
 }
-
-
+/* 
+.bg-light {
+  overflow: hidden !important; 
+    position: fixed !important;
+   bottom: 0 !important;
+} */

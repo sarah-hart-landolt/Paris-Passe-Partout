@@ -6,12 +6,14 @@ import LoginRegister from "./LoginRegister";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
+import '../App.css';
+
 // import TagList from "./tag/TagList";
 // import { CategoryList } from "./categories/CategoryList";
 // import PostDetails from "./posts/PostDetails";
-// import AddPostForm from "./posts/AddPostForm";
+import AddPost from "./posts/AddPost";
 // import { UserProfileList } from "./userProfiles/UserProfileList";
-// import {UserProfileDetails} from "./userProfiles/UserProfileDetails";
+import {UserProfilePage} from "./userProfile/UserProfilePage";
 // import { DeactivatedList } from "./userProfiles/DeactivatedList";
 // import { ReactionList} from "./reactions/ReactionList"
 // import SubscriptionList from "./subscriptions/SubscriptionList";
@@ -22,6 +24,7 @@ export default function ApplicationViews() {
   const userProfile = JSON.parse(sessionStorage.getItem("userProfile"));
 
   return (
+    <div className="mainContainer">
     <main>
       <Switch>
         {/* <Route path="/" exact>
@@ -41,15 +44,15 @@ export default function ApplicationViews() {
 
         <Route path="/posts/:id" exact>
           {isLoggedIn ? <PostDetails /> : <Redirect to="/welcome" />}
-        </Route>
-
-        <Route path="/addposts" exact>
-          {isLoggedIn ? <AddPostForm /> : <Redirect to="/welcome" />}
-        </Route>
-
-        <Route path="/userProfiles/:id" exact>
-          {isLoggedIn ? <UserProfileDetails /> : <Redirect to="/welcome" />}
         </Route> */}
+
+        <Route path="/addPin" exact>
+          {isLoggedIn ? <AddPost /> : <Redirect to="/welcome" />}
+        </Route>
+
+        <Route path="/user/:userProfile" exact>
+          {isLoggedIn ? <UserProfilePage /> : <Redirect to="/welcome" />}
+        </Route>
 
         <Route path="/welcome">
           <LoginRegister/>
@@ -59,7 +62,7 @@ export default function ApplicationViews() {
           <Login/>
         </Route>
 
-        <Route path="/register">
+        <Route path="/register" exact>
           <Register/>
         </Route>
 
@@ -82,5 +85,6 @@ export default function ApplicationViews() {
       </Switch>
       
     </main>
+    </div>
   );
 };

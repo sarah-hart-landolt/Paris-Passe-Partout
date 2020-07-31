@@ -3,6 +3,7 @@ using System;
 using ParisPassePartout.Data;
 using ParisPassePartout.Models;
 using ParisPassePartout.Repositories;
+using Microsoft.Extensions.Configuration;
 
 namespace Tabloid.Controllers
 {
@@ -15,6 +16,7 @@ namespace Tabloid.Controllers
         {
             _userProfileRepository = new UserProfileRepository(context);
         }
+          
 
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetUserProfile(string firebaseUserId)
@@ -52,5 +54,19 @@ namespace Tabloid.Controllers
             _userProfileRepository.Update(userProfile);
             return Ok(userProfile);
         }
+
+        //[HttpGet("search")]
+        //public IActionResult Search(string searchString)
+        //{
+        //    if (String.IsNullOrEmpty(searchString))
+        //    {
+        //        return Ok(_userProfileRepository.GetAll());
+        //    }
+        //    else
+        //    {
+        //        return Ok(_userProfileRepository.Search(searchString));
+
+        //    }
+        //}
     }
 }

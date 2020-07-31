@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ParisPassePartout.Models
 {
-    public class ListPost
+    public class PostPinList
     {
     }
 }
