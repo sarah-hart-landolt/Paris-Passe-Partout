@@ -13,10 +13,10 @@ namespace ParisPassePartout.Controllers
     {
         private readonly CategoryRepository _categoryRepository;
         private readonly UserProfileRepository _userProfileRepository;
-        public CategoryController(ApplicationDbContext context)
+        public CategoryController(ApplicationDbContext context, IConfiguration configuration)
         {
             _categoryRepository = new CategoryRepository(context);
-            _userProfileRepository = new UserProfileRepository(context);
+            _userProfileRepository = new UserProfileRepository(context, configuration);
         }
         [HttpGet]
         public IActionResult Get()

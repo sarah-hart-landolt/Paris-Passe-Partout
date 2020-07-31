@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using ParisPassePartout.Data;
 using ParisPassePartout.Models;
 using ParisPassePartout.Repositories;

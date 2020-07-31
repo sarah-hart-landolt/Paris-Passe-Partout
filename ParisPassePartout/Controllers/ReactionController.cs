@@ -16,10 +16,10 @@ namespace ParisPassePartout.Controllers
         private readonly ReactionRepository _reactionRepository;
         private readonly UserProfileRepository _userProfileRepository;
 
-        public ReactionController(ApplicationDbContext context)
+        public ReactionController(ApplicationDbContext context, IConfiguration configuration)
         {
             _reactionRepository = new ReactionRepository(context);
-            _userProfileRepository = new UserProfileRepository(context);
+            _userProfileRepository = new UserProfileRepository(context, configuration);
         }
 
         [HttpGet]

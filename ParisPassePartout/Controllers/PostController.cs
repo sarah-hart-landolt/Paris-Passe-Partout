@@ -20,7 +20,7 @@ namespace ParisPassePartout.Controllers
         public PostController(ApplicationDbContext context, IConfiguration configuration)
         {
             _postRepository = new PostRepository(context, configuration);
-            _upRepository = new UserProfileRepository(context);
+            _upRepository = new UserProfileRepository(context, configuration);
             _ptRepository = new PostTagRepository(context);
             _tagRepository = new TagRepository(context);
         }
@@ -45,10 +45,16 @@ namespace ParisPassePartout.Controllers
         }
 
         [HttpGet ("myposts")]
-        public IActionResult GetPostsByUser(int id)
+        public IActionResult GetPostsByCurrentUser(int id)
         {
             var currentUser = GetCurrentUserProfile();
             return Ok(_postRepository.GetAllCUPosts(currentUser.Id));
+        }
+
+        [HttpGet("myposts/{id}")]
+        public IActionResult GetPostsByUser(int id)
+        {
+            return Ok(_postRepository.GetAllCUPosts(id));
         }
 
         [HttpPost]
@@ -66,6 +72,7 @@ namespace ParisPassePartout.Controllers
         {
             var currentUser = GetCurrentUserProfile();
             post.UserProfileId = currentUser.Id;
+            post.CreateDateTime = DateTime.Now;
             if (id != post.Id)
             {
                 return BadRequest();

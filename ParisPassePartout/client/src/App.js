@@ -7,6 +7,7 @@ import ApplicationViews from "./components/ApplicationViews";
 import { PostProvider } from './providers/PostProvider';
 import AddPost from './components/posts/AddPost';
 import { CategoryProvider } from './providers/CategoryProvider';
+import { SubscriptionProvider } from './providers/SubscriptionProvider';
 
 function App() {
   
@@ -15,11 +16,13 @@ function App() {
     <Router>
       <UserProfileProvider>
         <PostProvider>
+          <SubscriptionProvider>
           <CategoryProvider>
           <Header />
           {/* <AddPost /> */}
           <ApplicationViews />
           </CategoryProvider>
+          </SubscriptionProvider>
           </PostProvider>
       </UserProfileProvider>
     </Router>

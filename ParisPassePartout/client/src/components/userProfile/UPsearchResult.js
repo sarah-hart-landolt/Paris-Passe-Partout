@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 
 const UPsearchResult = ({ result, show }) => {
     const [collapse, showCollapse] = useState(false)
-    const userProfile = JSON.parse(sessionStorage.getItem("userProfile"));
 
     return (
         <DropdownItem>
             <Card onMouseEnter={() => showCollapse(true)} onMouseLeave={() => showCollapse(false)}>
-                <Link to={`/posts/${result.id}`} onClick={() => show(false)} >
+                <Link to={`/user/other/${result.id}`} onClick={() => show(false)} >
 
                     {/* {
                         result.imageLocation === "" || result.imageLocation === null

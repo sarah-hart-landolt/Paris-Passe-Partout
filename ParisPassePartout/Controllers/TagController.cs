@@ -16,10 +16,10 @@ namespace ParisPassePartout.Controllers
         private readonly TagRepository _tagRepository;
         private readonly UserProfileRepository _userProfileRepository;
 
-        public TagController(ApplicationDbContext context)
+        public TagController(ApplicationDbContext context, IConfiguration configuration)
         {
             _tagRepository = new TagRepository(context);
-            _userProfileRepository = new UserProfileRepository(context);
+            _userProfileRepository = new UserProfileRepository(context, configuration);
         }
 
         [HttpGet]

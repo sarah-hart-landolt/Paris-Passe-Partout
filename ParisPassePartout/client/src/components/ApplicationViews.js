@@ -14,9 +14,9 @@ import '../App.css';
 import AddPost from "./posts/AddPost";
 // import { UserProfileList } from "./userProfiles/UserProfileList";
 import {UserProfilePage} from "./userProfile/UserProfilePage";
-// import { DeactivatedList } from "./userProfiles/DeactivatedList";
+import {OtherUserProfilePage} from "./userProfile/OtherUserProfilePage";
+import SubscriptionList from "./feed/SubscriptionList";
 // import { ReactionList} from "./reactions/ReactionList"
-// import SubscriptionList from "./subscriptions/SubscriptionList";
 
 
 export default function ApplicationViews() {
@@ -32,13 +32,13 @@ export default function ApplicationViews() {
         </Route>
         <Route path="/tags">
           {isLoggedIn ?  <TagList /> : <Redirect to="/welcome" />}
+        </Route> */}
+
+        <Route path="/feed" exact>
+          {isLoggedIn ? <SubscriptionList /> : <Redirect to="/welcome" />}
         </Route>
 
-        <Route path="/posts" exact>
-          {isLoggedIn ? <PostList /> : <Redirect to="/welcome" />}
-        </Route>
-
-        <Route path="/myposts" exact>
+        {/* <Route path="/myposts" exact>
           {isLoggedIn ? <MyPostList /> : <Redirect to="/welcome" />}
         </Route>
 
@@ -52,6 +52,10 @@ export default function ApplicationViews() {
 
         <Route path="/user/:userProfile" exact>
           {isLoggedIn ? <UserProfilePage /> : <Redirect to="/welcome" />}
+        </Route>
+
+        <Route path="/user/other/:id" exact>
+          {isLoggedIn ? <OtherUserProfilePage /> : <Redirect to="/welcome" />}
         </Route>
 
         <Route path="/welcome">

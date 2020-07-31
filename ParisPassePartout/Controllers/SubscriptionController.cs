@@ -17,10 +17,10 @@ namespace ParisPassePartout.Controllers
         private readonly SubscriptionRepository _subscriptionRepository;
         private readonly UserProfileRepository _userProfileRepository;
 
-        public SubscriptionController(ApplicationDbContext context)
+        public SubscriptionController(ApplicationDbContext context, IConfiguration configuration)
         {
             _subscriptionRepository = new SubscriptionRepository(context );
-            _userProfileRepository = new UserProfileRepository(context);
+            _userProfileRepository = new UserProfileRepository(context, configuration);
 
         }
 
@@ -60,12 +60,12 @@ namespace ParisPassePartout.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _subscriptionRepository.Delete(id);
-            return NoContent();
-        }
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    _subscriptionRepository.Delete(id);
+        //    return NoContent();
+        //}
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;

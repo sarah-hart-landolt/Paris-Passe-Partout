@@ -3,6 +3,7 @@ using System;
 using ParisPassePartout.Data;
 using ParisPassePartout.Models;
 using ParisPassePartout.Repositories;
+using Microsoft.Extensions.Configuration;
 
 namespace ParisPassePartout.Controllers
 {
@@ -11,9 +12,9 @@ namespace ParisPassePartout.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly UserProfileRepository _userProfileRepository;
-        public UserProfileController(ApplicationDbContext context)
+        public UserProfileController(ApplicationDbContext context, IConfiguration configuration)
         {
-            _userProfileRepository = new UserProfileRepository(context);
+            _userProfileRepository = new UserProfileRepository(context, configuration);
         }
           
 
@@ -54,19 +55,19 @@ namespace ParisPassePartout.Controllers
             return Ok(userProfile);
         }
 
-        //[HttpGet("search")]
+        [HttpGet("search")]
 
-        //public IActionResult Search(string searchString)
-        //{
-        //    if (String.IsNullOrEmpty(searchString))
-        //    {
-        //        return Ok(_userProfileRepository.GetAll());
-        //    }
-        //    else
-        //    {
-        //        return Ok(_userProfileRepository.Search(searchString));
+        public IActionResult Search(string searchString)
+        {
+            if (String.IsNullOrEmpty(searchString))
+            {
+                return Ok(_userProfileRepository.GetAll());
+            }
+            else
+            {
+                return Ok(_userProfileRepository.Search(searchString));
 
-        //    }
-        //}
+            }
+        }
     }
 }

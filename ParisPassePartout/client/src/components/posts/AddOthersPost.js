@@ -14,9 +14,8 @@ import { CategoryContext } from "../../providers/CategoryProvider";
 import { useHistory } from "react-router-dom";
 
 
-const AddPost = () => {
+const AddOthersPost = ({post}) => {
   const { addPost } = useContext(PostContext);
-  const [results, setResults] = useState();
   const [captionText, setCaptionText] = useState();
   const { categories, getCategories } = useContext(CategoryContext);
   const category = useRef();
@@ -28,43 +27,22 @@ const AddPost = () => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    const autocomplete = new window.google.maps.places.Autocomplete(
-      /** @type {!HTMLInputElement} */ (document.getElementById(
-        "autocomplete"
-      )),
-      {
-        types: ["establishment"],
-        componentRestrictions: { country: "fr" },
-        location: { lat: 48.864716, lng: 2.349014 },
-        radius: "500",
-      }
-    );
-    autocomplete.addListener("place_changed", onPlaceChanged);
-
-    function onPlaceChanged() {
-      var place = autocomplete.getPlace();
-      console.log(place);
-      setResults(place);
-    }
-  }, []);
-
-
   const submitForm = (e) => {
     const categoryId = parseInt(category.current.value);
     e.preventDefault();
     addPost({
-      name: results.name,
+      name: post.name,
       content: captionText,
-      imageLocation: results.photos[0].getUrl({maxWidth: 12000, maxHeight: 12000}),
+      imageLocation: post.imageLocation,
       categoryId: categoryId,
-      longitude: results.geometry.location.lng(),
-      latitude: results.geometry.location.lat(),
-      address:results.formatted_address, 
-      status: results.business_status,
-      zipCode: results.address_components[6].long_name,
-      phone: results.international_phone_number,
-      website: results.website
+      longitude: post.longitude,
+      latitude: post.latitude,
+      address: post.address, 
+      status: post.status,
+      zipCode: post.zipCode,
+      phone: post.phone,
+      website: post.website,
+      originalPostId: post.id 
 
     }).then(() => {
       history.push("/user/:userProfile")
@@ -74,11 +52,6 @@ const AddPost = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <input
-          id="autocomplete"
-          placeholder="Enter a place in Paris"
-          type="text"
-        />
         <div className="container pt-4">
           <div className="row justify-content-center">
             <Card id="googlePin" className="col-sm-12 col-lg-6">
@@ -86,18 +59,13 @@ const AddPost = () => {
                 <Form onSubmit={submitForm}>
                   <fieldset>
                     <FormGroup>
-                      <Label for="name">Name</Label>
-                      <div>{results?.name}</div>
+                      <h3>{post.name}</h3>
                     </FormGroup>
                     <FormGroup>
-                      <Label for="address">Address</Label>
-                      <div>{results?.formatted_address}</div>
-                      <div>{results?.address_components[6].long_name}</div>
-                      <div>{results?.business_status}</div>
-                      <div>{results?.international_phone_number}</div>
+                      <div><img className="googlePhoto" src={post.imageLocation} /></div>
                     </FormGroup>
                     <FormGroup>
-                      <Label for="captionText">Write a caption</Label>
+                      <Label for="captionText">Write your own caption</Label>
                       <Input
                         required
                         id="captionText"
@@ -105,18 +73,7 @@ const AddPost = () => {
                         onChange={(e) => setCaptionText(e.target.value)}
                       />
                     </FormGroup>
-                    <FormGroup>
-                      <Label for="website">Website</Label>
-                      <div>{results?.website}</div>
-                    </FormGroup>
-                    <FormGroup>
-                      <Label for="photo">Photo</Label>
-                      <img
-                        className="googlePhoto"
-                        // src={((results?.photos[0].html_attributions[0]).split("\""))[2]}
-                      />
-                    </FormGroup>
-                    <FormGroup>
+                     <FormGroup>
                       <fieldset className="input--addCategory">
                         <select
                           defaultValue=""
@@ -136,7 +93,7 @@ const AddPost = () => {
                     </FormGroup>
 
                     <FormGroup>
-                      <Button>Add Pin</Button>
+                      <Button>Save {post.userProfile.displayName}'s Pin</Button>
                     </FormGroup>
                   </fieldset>
                 </Form>
@@ -144,11 +101,9 @@ const AddPost = () => {
             </Card>
           </div>
         </div>
-        <div>{results?.geometry.location.lat()}</div>
-        <div>{results?.geometry.location.lng()}</div>
       </div>
     </div>
   );
 };
 
-export default AddPost;
+export default AddOthersPost;

@@ -17,10 +17,10 @@ namespace ParisPassePartout.Controllers
         private readonly CommentRepository _commentRepository;
         private readonly UserProfileRepository _userProfileRepository;
 
-        public CommentController(ApplicationDbContext context)
+        public CommentController(ApplicationDbContext context, IConfiguration configuration)
         {
             _commentRepository = new CommentRepository(context);
-            _userProfileRepository = new UserProfileRepository(context);
+            _userProfileRepository = new UserProfileRepository(context, configuration);
 
         }
 
