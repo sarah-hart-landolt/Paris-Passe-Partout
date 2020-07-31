@@ -3,9 +3,8 @@ using System;
 using ParisPassePartout.Data;
 using ParisPassePartout.Models;
 using ParisPassePartout.Repositories;
-using Microsoft.Extensions.Configuration;
 
-namespace Tabloid.Controllers
+namespace ParisPassePartout.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -56,6 +55,7 @@ namespace Tabloid.Controllers
         }
 
         //[HttpGet("search")]
+
         //public IActionResult Search(string searchString)
         //{
         //    if (String.IsNullOrEmpty(searchString))

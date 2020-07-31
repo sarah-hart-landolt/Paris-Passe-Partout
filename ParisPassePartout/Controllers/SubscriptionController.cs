@@ -17,10 +17,10 @@ namespace ParisPassePartout.Controllers
         private readonly SubscriptionRepository _subscriptionRepository;
         private readonly UserProfileRepository _userProfileRepository;
 
-        public SubscriptionController(ApplicationDbContext context, IConfiguration configuration)
+        public SubscriptionController(ApplicationDbContext context)
         {
             _subscriptionRepository = new SubscriptionRepository(context );
-            _userProfileRepository = new UserProfileRepository(context, configuration);
+            _userProfileRepository = new UserProfileRepository(context);
 
         }
 
