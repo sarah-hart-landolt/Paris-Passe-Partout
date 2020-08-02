@@ -8,29 +8,39 @@ using System.Threading.Tasks;
 
 namespace ParisPassePartout.Repositories
 {
-    public class PinCollectionRepository
+    public class CollectionRepository
     {
         private readonly ApplicationDbContext _context;
-        public PinCollectionRepository(ApplicationDbContext context)
+        public CollectionRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public List<PinCollection> GetAll()
+        public List<Collection> GetAll()
         {
-            return _context.PinCollection
+            return _context.Collection
                 .OrderBy(pc => pc.Name)
                 .Include(p => p.UserProfile)
                 .ToList();
         }
 
-        public PinCollection GetById(int id)
+        public Collection GetById(int id)
         {
-            return _context.PinCollection
+            return _context.Collection
                .FirstOrDefault(pc => pc.Id == id);
         }
 
-        public void Add(PinCollection pc)
+        public List<Collection> GetCollectionByUser(int userProfileId)
+        {
+            return _context.Collection
+                       .Include(c => c.UserProfile)
+                       .Where(c => c.UserProfileId == userProfileId)
+                       .OrderBy(c => c.Name)
+                       .ToList();
+
+        }
+
+        public void Add(Collection pc)
         {
             _context.Add(pc);
             _context.SaveChanges();
@@ -39,16 +49,16 @@ namespace ParisPassePartout.Repositories
         public void Delete(int id)
         {
             var pc = GetById(id);
-            foreach (var postPinCollection in _context.PostPinCollection
-                .Where(ppc => ppc.PinCollectionId == pc.Id))
+            foreach (var postPinCollection in _context.PostCollection
+                .Where(ppc => ppc.CollectionId == pc.Id))
             {
-                _context.PostPinCollection.Remove(postPinCollection);
+                _context.PostCollection.Remove(postPinCollection);
             }
 
-            _context.PinCollection.Remove(pc);
+            _context.Collection.Remove(pc);
             _context.SaveChanges();
         }
-        public void Update(PinCollection pc)
+        public void Update(Collection pc)
         {
             _context.Entry(pc).State = EntityState.Modified;
             _context.SaveChanges();

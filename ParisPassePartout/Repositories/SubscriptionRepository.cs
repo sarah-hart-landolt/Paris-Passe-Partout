@@ -52,11 +52,11 @@ namespace ParisPassePartout.Repositories
             _context.SaveChanges();
         }
 
-        //public void Delete(int id)
-        //{
-        //    var subscription = GetSubscription(id);
-        //    _context.Subscription.Remove(subscription);
-        //    _context.SaveChanges();
-        //}
+        public void Delete(int id)
+        {
+            var subscription = GetSubscription(id);
+            _context.Subscription.Remove(subscription);
+            _context.SaveChanges();
+        }
     }
 }

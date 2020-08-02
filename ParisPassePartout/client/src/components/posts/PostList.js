@@ -5,6 +5,7 @@ import { CardColumns } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import "./Pin.css";
 
+
 const PostList = () => {
   const { cuPosts, getUserPosts} = useContext(PostContext);
   const history = useHistory();

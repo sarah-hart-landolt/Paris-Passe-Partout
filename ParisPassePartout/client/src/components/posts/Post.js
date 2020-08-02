@@ -3,7 +3,7 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle,  Modal,
     ModalHeader,
-    ModalBody, Button, Form,
+    ModalBody, Button, Form, ModalFooter,
     FormGroup,
     Label,
     Input,
@@ -11,12 +11,15 @@ import {
 import "./Pin.css"
 import { PostContext } from "../../providers/PostProvider";
 import { CategoryContext } from "../../providers/CategoryProvider";
+import AddPostCollection from "../postCollections/AddPostCollection";
 
 
 
 
 const Post = ({post, rp}) => {
     const [modal, setModal] = useState(false);
+    const [collectionModal, setCollectionModal] = useState(false);
+
     const [isShown, setIsShown] = useState(false);  
     const [editModal, setEditModal] = useState(false);
     const [captionText, setCaptionText] = useState();
@@ -24,6 +27,8 @@ const Post = ({post, rp}) => {
     const { categories, getCategories } = useContext(CategoryContext);
     const category = useRef();
     const toggleModal = () => setModal(!modal);
+    const toggleAddModal = () => setCollectionModal(!collectionModal);
+
     const toggleEditModal = () => setEditModal(!editModal);
 
 
@@ -71,9 +76,18 @@ const Post = ({post, rp}) => {
                   "Are you sure you wish to delete this pin?"
                 ) && deletePost(post.id).then(rp)
               }>Delete</Button>
+               <Button onClick={toggleAddModal
+              }>Add to Collection</Button>
             </div>
           )}
             </Card>
+            <Modal isOpen={collectionModal} fade={false} toggle={toggleAddModal}>
+          <ModalHeader toggle={toggleAddModal}>Create a new collection!</ModalHeader>
+          <ModalBody>
+            <AddPostCollection post={post} toggle={toggleAddModal} refresh={rp} />
+          </ModalBody>
+          <ModalFooter></ModalFooter>
+        </Modal>
 
             <Modal
             isOpen={modal}

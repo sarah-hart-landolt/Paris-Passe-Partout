@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 
 namespace ParisPassePartout.Repositories
 {
-    public class PostPinCollectionRepository
+    public class PostCollectionRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public PostPinCollectionRepository(ApplicationDbContext context)
+        public PostCollectionRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public List<PostPinCollection> GetAll()
+        public List<PostCollection> GetAll()
         {
-            return _context.PostPinCollection.ToList();
+            return _context.PostCollection.ToList();
         }
 
-        public PostPinCollection GetByPCId(int id)
+        public PostCollection GetByPCId(int id)
         {
-            return _context.PostPinCollection
+            return _context.PostCollection
                .FirstOrDefault(pt => pt.Id == id);
         }
 
-        public void Add(PostPinCollection ppc)
+        public void Add(PostCollection ppc)
         {
             _context.Add(ppc);
             _context.SaveChanges();
@@ -36,7 +36,7 @@ namespace ParisPassePartout.Repositories
         public void Delete(int id)
         {
             var ppc = GetByPCId(id);
-            _context.PostPinCollection.Remove(ppc);
+            _context.PostCollection.Remove(ppc);
             _context.SaveChanges();
         }
     }

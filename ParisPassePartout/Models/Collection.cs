@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParisPassePartout.Models
 {
-    public class PinCollection
+    public class Collection
     {
         public int Id { get; set; }
 

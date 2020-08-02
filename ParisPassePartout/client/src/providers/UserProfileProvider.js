@@ -9,14 +9,7 @@ export function UserProfileProvider(props) {
   const apiUrl = "/api/userprofile";
   const userProfile = JSON.parse(sessionStorage.getItem("userProfile"));
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
-  const [isAdmin, setAdmin] = useState(false);
-  const [isActivated, setIsActivated] = useState(false);
-
-  useEffect(() => {
-    if (isLoggedIn && userProfile.userTypeId === 1) {
-      setAdmin(true);
-    }
-  });
+ 
 
   const [userProfiles, setUserProfiles] = useState([]);
 
@@ -52,7 +45,6 @@ export function UserProfileProvider(props) {
       .then(() => {
         sessionStorage.clear();
         setIsLoggedIn(false);
-        setAdmin(false);
       });
   };
 
@@ -153,7 +145,6 @@ export function UserProfileProvider(props) {
         register,
         getToken,
         getUserProfileById,
-        isAdmin,
         getUserProfiles,
         userProfiles,
         editUserProfile,

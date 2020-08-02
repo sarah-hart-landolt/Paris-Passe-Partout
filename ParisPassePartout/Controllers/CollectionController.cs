@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ParisPassePartout.Data;
 using ParisPassePartout.Models;
@@ -11,52 +12,60 @@ using System.Threading.Tasks;
 
 namespace ParisPassePartout.Controllers
 {
-    public class PinCollectionController : ControllerBase
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CollectionController : ControllerBase
     {
-        private readonly PinCollectionRepository _pcRepository;
+        private readonly CollectionRepository _collectionRepository;
         private readonly UserProfileRepository _userProfileRepository;
 
-        public PinCollectionController(ApplicationDbContext context, IConfiguration configuration)
+        public CollectionController(ApplicationDbContext context, IConfiguration configuration)
         {
-            _pcRepository = new PinCollectionRepository(context);
+            _collectionRepository = new CollectionRepository(context);
             _userProfileRepository = new UserProfileRepository(context, configuration);
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_pcRepository.GetAll());
+            return Ok(_collectionRepository.GetAll());
         }
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var tag = _pcRepository.GetById(id);
-            if (tag != null)
+            var collection = _collectionRepository.GetById(id);
+            if (collection != null)
             {
                 NotFound();
             }
-            return Ok(tag);
+            return Ok(collection);
+        }
+
+        [HttpGet("pins/{userProfileId}")]
+        public IActionResult GetAllCommentsByPostId(int userProfileId)
+        {
+            return Ok(_collectionRepository.GetCollectionByUser(userProfileId));
         }
 
         [HttpPost]
-        public IActionResult Post(PinCollection pc)
+        public IActionResult Post(Collection collection)
         {
-            pc.CreateDateTime = DateTime.Now;
+            collection.CreateDateTime = DateTime.Now;
             var currentUser = GetCurrentUserProfile();
-            pc.UserProfileId = currentUser.Id;
+            collection.UserProfileId = currentUser.Id;
 
-            _pcRepository.Add(pc);
-            return CreatedAtAction(nameof(Get), new { id = pc.Id }, pc);
+            _collectionRepository.Add(collection);
+            return CreatedAtAction(nameof(Get), new { id = collection.Id }, collection);
         }
         [HttpPut("{id}")]
-        public IActionResult Put(int id, PinCollection pc)
+        public IActionResult Put(int id, Collection pc)
         {
             if (id != pc.Id)
             {
                 return BadRequest();
             }
 
-            _pcRepository.Update(pc);
+            _collectionRepository.Update(pc);
             return NoContent();
         }
 
@@ -64,7 +73,7 @@ namespace ParisPassePartout.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _pcRepository.Delete(id);
+            _collectionRepository.Delete(id);
             return NoContent();
         }
 

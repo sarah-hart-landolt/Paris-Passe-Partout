@@ -60,12 +60,12 @@ namespace ParisPassePartout.Controllers
             return NoContent();
         }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    _subscriptionRepository.Delete(id);
-        //    return NoContent();
-        //}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _subscriptionRepository.Delete(id);
+            return NoContent();
+        }
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;

@@ -18,12 +18,11 @@ import {
   Dropdown,
 } from "reactstrap";
 import { UserProfileContext } from "../providers/UserProfileProvider";
-// import TabloidFlowerBigTransparent from "../images/TabloidFlowerBigTransparent.png";
 import "../index.css";
 import UPSearch from "./userProfile/UPSearch";
 
 export default function Header() {
-  const { isLoggedIn, logout, isAdmin } = useContext(UserProfileContext);
+  const { isLoggedIn, logout } = useContext(UserProfileContext);
   const [isOpen, setIsOpen] = useState(false);
   const toggleCollapse = () => setIsOpen(!isOpen);
   const toggle = () => setIsOpen(!isOpen);
@@ -35,7 +34,6 @@ export default function Header() {
     <div className="navBar">
       <Navbar color="light" light expand="md">
         <NavbarBrand tag={RRNavLink} to="/">
-          {/* <img className="iconImg" alt="" src={TabloidFlowerBigTransparent}></img> */}
           Paris Passe Partout
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />

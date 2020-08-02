@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace ParisPassePartout.Models
 {
-    public class PostPinCollection
+    public class PostCollection
     {
 
         public int Id { get; set; }
         public int PostId { get; set; }
-        public int PinCollectionId { get; set; }
+        public int CollectionId { get; set; }
         public Post Post { get; set; }
-        public PinCollection PinCollection { get; set; }
+        public Collection Collection { get; set; }
     }
 }
