@@ -3,8 +3,7 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { CollectionContext } from "../../providers/CollectionProvider";
 
 
-
-const AddCollection = ({toggle, refresh}) => {
+const EditProfile = () => {
     const [collectionName, setNameText] = useState();
     const {addCollection} = useContext(CollectionContext);
     

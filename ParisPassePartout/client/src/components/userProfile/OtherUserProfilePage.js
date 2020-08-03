@@ -22,12 +22,14 @@ export const OtherUserProfilePage = () => {
     getOtherUserPosts(profileId);
     // eslint-disable-next-line
   }, []);
-  debugger
+  
 
   useEffect(() => {
     getUserProfileById(profileId).then(setOUProfile);
     // eslint-disable-next-line
   }, []);
+
+
 
 
 

@@ -5,7 +5,7 @@ import { PostCollectionContext } from "../../providers/PostCollectionProvider";
 
 
 
-const AddPostCollection = ({toggle, post}) => {
+const AddPostCollection = ({toggle, post, refreshrefresh}) => {
     const {addPostCollection} = useContext(PostCollectionContext)
     const { getCollectionsByUserId } = useContext(CollectionContext);
     const userProfile = JSON.parse(sessionStorage.getItem("userProfile"));
@@ -25,7 +25,7 @@ const AddPostCollection = ({toggle, post}) => {
     addPostCollection({
       postId: post.id,
       collectionId: collectionId
-  });
+  }).then(refreshrefresh())
   toggle()
   };
    

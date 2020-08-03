@@ -61,6 +61,9 @@ export default function ApplicationViews() {
           <Route path="/postcollection/:id" exact>
             {isLoggedIn ? <PostCollectionList /> : <Redirect to="/welcome" />}
           </Route>
+          <Route path="/editprofile" exact>
+            {isLoggedIn ? <PostCollectionList /> : <Redirect to="/welcome" />}
+          </Route>
 
           <Route path="/welcome">
             <LoginRegister />

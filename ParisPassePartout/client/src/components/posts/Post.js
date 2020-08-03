@@ -16,7 +16,7 @@ import AddPostCollection from "../postCollections/AddPostCollection";
 
 
 
-const Post = ({post, rp}) => {
+const Post = ({post, rp, refresh}) => {
     const [modal, setModal] = useState(false);
     const [collectionModal, setCollectionModal] = useState(false);
 
@@ -90,7 +90,7 @@ const Post = ({post, rp}) => {
             <Modal isOpen={collectionModal} fade={false} toggle={toggleAddModal}>
           <ModalHeader toggle={toggleAddModal}>Create a new collection!</ModalHeader>
           <ModalBody>
-            <AddPostCollection post={post} toggle={toggleAddModal} refresh={rp} />
+            <AddPostCollection post={post} toggle={toggleAddModal} refresh={rp} refreshrefresh={refresh}/>
           </ModalBody>
           <ModalFooter></ModalFooter>
         </Modal>

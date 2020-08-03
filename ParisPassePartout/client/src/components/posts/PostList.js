@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import "./Pin.css";
 
 
-const PostList = () => {
+const PostList = ({refresh}) => {
   const { cuPosts, getUserPosts} = useContext(PostContext);
   const history = useHistory();
 
@@ -24,7 +24,7 @@ const PostList = () => {
         <CardColumns>
           <div>
             {cuPosts.map((post) => {
-              return <Post post={post} rp={refreshPosts}/>;
+              return <Post post={post} rp={refreshPosts} refresh={refresh}/>;
             })}
           </div>
         </CardColumns>
