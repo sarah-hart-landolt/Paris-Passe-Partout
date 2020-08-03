@@ -32,6 +32,7 @@ namespace ParisPassePartout.Models
         public string Status { get; set; }
         public string Phone { get; set; }
         public string Website { get; set; }
+        public Boolean HasTried { get; set; }
 
 
         //public List<Comment> CommentList { get; set; }

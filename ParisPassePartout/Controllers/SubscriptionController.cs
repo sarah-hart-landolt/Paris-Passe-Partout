@@ -32,6 +32,14 @@ namespace ParisPassePartout.Controllers
             return Ok(_subscriptionRepository.GetBySubscriberProfileId(currentUser.Id));
         }
 
+         [HttpGet("follow")]
+        public IActionResult GetSubscriptionByCurrentUser()
+        {
+            var currentUser = GetCurrentUserProfile();
+
+            return Ok(_subscriptionRepository.GetSubscriptionByCurrentUser(currentUser.Id));
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {

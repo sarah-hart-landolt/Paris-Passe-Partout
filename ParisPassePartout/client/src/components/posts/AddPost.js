@@ -13,15 +13,14 @@ import { PostContext } from "../../providers/PostProvider";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { useHistory } from "react-router-dom";
 
-
 const AddPost = () => {
   const { addPost } = useContext(PostContext);
   const [results, setResults] = useState();
   const [captionText, setCaptionText] = useState();
   const { categories, getCategories } = useContext(CategoryContext);
   const category = useRef();
+  const hasTried= useRef();
   const history = useHistory();
-
 
   useEffect(() => {
     getCategories();
@@ -49,26 +48,30 @@ const AddPost = () => {
     }
   }, []);
 
-
   const submitForm = (e) => {
     const categoryId = parseInt(category.current.value);
+    const hasTriedInt = parseInt(hasTried.current.value);
+
     e.preventDefault();
     addPost({
       name: results.name,
       content: captionText,
-      imageLocation: results.photos[0].getUrl({maxWidth: 12000, maxHeight: 12000}),
+      imageLocation: results.photos[0].getUrl({
+        maxWidth: 12000,
+        maxHeight: 12000,
+      }),
       categoryId: categoryId,
       longitude: results.geometry.location.lng(),
       latitude: results.geometry.location.lat(),
-      address:results.formatted_address, 
+      address: results.formatted_address,
       status: results.business_status,
       zipCode: results.address_components[6].long_name,
       phone: results.international_phone_number,
-      website: results.website
-
+      website: results.website,
+      hasTried: hasTriedInt,
     }).then(() => {
-      history.push("/user/:userProfile")
-  });
+      history.push("/user/:userProfile");
+    });
   };
 
   return (
@@ -124,6 +127,7 @@ const AddPost = () => {
                           name="category"
                           id="category"
                           className="form-control"
+                          required
                         >
                           <option value="0">Select a Category</option>
                           {categories.map((category) => (
@@ -131,6 +135,26 @@ const AddPost = () => {
                               {category.name}
                             </option>
                           ))}
+                        </select>
+                      </fieldset>
+                    </FormGroup>
+                    <FormGroup>
+                      <fieldset className="input--addCategory">
+                        <select
+                          defaultValue=""
+                          ref={hasTried}
+                          name="category"
+                          id="category"
+                          className="form-control"
+                        >
+                          <option value="0">Have you already tried this place?</option>
+                          <option value={1}>
+                            yes{" "}
+                          </option>
+                          <option value={0}>
+                            no{" "}
+                          </option>
+                          ))
                         </select>
                       </fieldset>
                     </FormGroup>

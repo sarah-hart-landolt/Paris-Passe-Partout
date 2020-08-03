@@ -1,6 +1,15 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { PostContext } from "../../providers/PostProvider";
+import {
+  Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle,  Modal,
+  ModalHeader,
+  ModalBody, Button, Form, ModalFooter,
+  FormGroup,
+  Label,
+  Input,
+} from 'reactstrap';
 
 
 export const MyMap = () => {
@@ -14,7 +23,7 @@ export const MyMap = () => {
         longitude: 2.3514616,
         width: "100vw",
         height: "100vh",
-        zoom: 10
+        zoom: 12
       });
 
    const [selectedPost, setSelectedPost] = useState(null);
@@ -35,15 +44,15 @@ export const MyMap = () => {
                 latitude={post.latitude}
                 longitude={post.longitude}
               >
-                <button
+                <Button outline
                   className="marker-btn"
                   onClick={e => {
                     e.preventDefault();
                     setSelectedPost(post);
                   }}
                 >
-                  <img src="/skateboarding.svg" alt="Skate Park Icon" />
-                </button>
+                  <i class={post.category.icon} aria-hidden="true"></i>
+                </Button>
               </Marker>
             ))}
     
@@ -56,8 +65,11 @@ export const MyMap = () => {
                 }}
               >
                 <div>
-                  <h2>{selectedPost.name}</h2>
+                  <h4>{selectedPost.name}</h4>
                   <p>{selectedPost.category.name}</p>
+                  <p>{(selectedPost?.hasTried === true) ? "has tried" : "want to try"} </p>
+                  <p><img style={{ height: "100px", padding: 0 }}src={selectedPost.imageLocation}/></p>
+
                 </div>
               </Popup>
             ) : null}

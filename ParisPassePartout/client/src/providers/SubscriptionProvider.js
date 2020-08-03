@@ -6,6 +6,8 @@ export const SubscriptionContext = createContext();
 export function SubscriptionProvider(props) {
   const { getToken } = useContext(UserProfileContext);
   const [subscriptions, setSubscriptions] = useState([]);
+  const [userSubscriptions, setUserSubscriptions] = useState([]);
+
 
   const apiUrl = "/api/subscription/";
 
@@ -22,7 +24,19 @@ export function SubscriptionProvider(props) {
         .then(setSubscriptions)
     );
   };
-
+  const getSubscriptionsByUser = () => {
+    return getToken().then((token) =>
+      fetch("/api/subscription/follow/", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        
+      }).then((resp) => resp.json())
+        .then(setUserSubscriptions)
+    );
+  };
     const addSubscription = (subscription) => {
       return getToken().then((token) =>
         fetch(apiUrl, {
@@ -57,9 +71,11 @@ export function SubscriptionProvider(props) {
     <SubscriptionContext.Provider
       value={{
         subscriptions,
+        userSubscriptions,
         getSubscriptions,
         addSubscription,
-        deleteSubscription
+        deleteSubscription,
+        getSubscriptionsByUser
       }}
     >
       {props.children}

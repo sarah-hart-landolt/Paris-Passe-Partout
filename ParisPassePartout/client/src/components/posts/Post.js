@@ -26,6 +26,8 @@ const Post = ({post, rp}) => {
     const { deletePost, editPost } = useContext(PostContext);
     const { categories, getCategories } = useContext(CategoryContext);
     const category = useRef();
+    const hasTried= useRef();
+
     const toggleModal = () => setModal(!modal);
     const toggleAddModal = () => setCollectionModal(!collectionModal);
 
@@ -39,6 +41,8 @@ const Post = ({post, rp}) => {
 
     const submitEditForm = (e) => {
       const categoryId = parseInt(category.current.value);
+      const hasTriedInt = parseInt(hasTried.current.value);
+
       e.preventDefault();
       editPost({
       id: post.id,
@@ -53,6 +57,8 @@ const Post = ({post, rp}) => {
       zipCode: post.zipCode,
       phone: post.phone,
       website: post.website,
+      hasTried: hasTriedInt,
+
   
       }).then(toggleEditModal).then(rp);
     };
@@ -142,6 +148,7 @@ const Post = ({post, rp}) => {
                           name="category"
                           id="category"
                           className="form-control"
+                          required
                         >
                           <option value="0">Select a Category</option>
                           {categories.map((category) => (
@@ -149,6 +156,26 @@ const Post = ({post, rp}) => {
                               {category.name}
                             </option>
                           ))}
+                        </select>
+                      </fieldset>
+                    </FormGroup>
+                    <FormGroup>
+                      <fieldset className="input--addCategory">
+                        <select
+                          defaultValue=""
+                          ref={hasTried}
+                          name="category"
+                          id="category"
+                          className="form-control"
+                        >
+                          <option value="0">Have you already tried this place?</option>
+                          <option value={1}>
+                            yes{" "}
+                          </option>
+                          <option value={0}>
+                            no{" "}
+                          </option>
+                          ))
                         </select>
                       </fieldset>
                     </FormGroup>

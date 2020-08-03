@@ -21,6 +21,13 @@ namespace ParisPassePartout.Repositories
         {
             return _context.Subscription.ToList();
         }
+
+        public List<Subscription> GetSubscriptionByCurrentUser(int id)
+        {
+            return _context.Subscription
+               .Where(s => s.SubscriberUserProfileId == id)
+               .ToList();
+        }
         public Subscription GetSubscription(int id)
         {
             return _context.Subscription
