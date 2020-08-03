@@ -4,13 +4,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Form,
-  FormGroup,
-  Label,
-  Input,
+  ModalFooter
 } from "reactstrap";
-import Post from "../posts/Post";
 import { CardColumns } from "reactstrap";
 import { CollectionContext } from "../../providers/CollectionProvider";
 import { Collection } from "./Collection";
@@ -53,6 +48,7 @@ const MyCollectionsList = () => {
               return <Collection collection={collection} refresh={refresh} />;
             })}
           </div>
+          
         </CardColumns>
       </section>
     </>

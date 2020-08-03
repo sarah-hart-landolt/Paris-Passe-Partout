@@ -27,7 +27,12 @@ namespace ParisPassePartout.Repositories
         public Collection GetById(int id)
         {
             return _context.Collection
-               .FirstOrDefault(pc => pc.Id == id);
+                     .Include(c => c.PostCollectionList)
+                      .ThenInclude(pc => pc.Post)
+                      .FirstOrDefault(c => c.Id == id);
+
+                          
+            
         }
 
         public List<Collection> GetCollectionByUser(int userProfileId)
@@ -35,6 +40,8 @@ namespace ParisPassePartout.Repositories
             return _context.Collection
                        .Include(c => c.UserProfile)
                        .Where(c => c.UserProfileId == userProfileId)
+                        .Include(c => c.PostCollectionList)
+                      .ThenInclude(pc => pc.Post)
                        .OrderBy(c => c.Name)
                        .ToList();
 

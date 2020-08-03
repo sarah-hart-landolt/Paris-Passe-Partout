@@ -17,6 +17,8 @@ namespace ParisPassePartout.Models
 
         public DateTime CreateDateTime { get; set; }
 
+        public List<PostCollection> PostCollectionList { get; set; }
+
 
         public UserProfile UserProfile { get; set; }
 

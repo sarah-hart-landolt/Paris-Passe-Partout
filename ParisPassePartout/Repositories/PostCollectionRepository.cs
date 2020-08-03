@@ -1,4 +1,5 @@
-﻿using ParisPassePartout.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ParisPassePartout.Data;
 using ParisPassePartout.Models;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace ParisPassePartout.Repositories
             return _context.PostCollection
                .FirstOrDefault(pt => pt.Id == id);
         }
+
 
         public void Add(PostCollection ppc)
         {

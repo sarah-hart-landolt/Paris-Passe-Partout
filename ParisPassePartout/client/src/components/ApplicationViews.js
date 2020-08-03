@@ -6,18 +6,17 @@ import LoginRegister from "./LoginRegister";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
-import '../App.css';
+import "../App.css";
 
 // import TagList from "./tag/TagList";
 // import { CategoryList } from "./categories/CategoryList";
 // import PostDetails from "./posts/PostDetails";
 import AddPost from "./posts/AddPost";
 // import { UserProfileList } from "./userProfiles/UserProfileList";
-import {UserProfilePage} from "./userProfile/UserProfilePage";
-import {OtherUserProfilePage} from "./userProfile/OtherUserProfilePage";
+import { UserProfilePage } from "./userProfile/UserProfilePage";
+import { OtherUserProfilePage } from "./userProfile/OtherUserProfilePage";
 import SubscriptionList from "./feed/SubscriptionList";
-// import { ReactionList} from "./reactions/ReactionList"
-
+import PostCollectionList from "./postCollections/PostCollectionList";
 
 export default function ApplicationViews() {
   const { isLoggedIn, isAdmin, isActivated } = useContext(UserProfileContext);
@@ -25,20 +24,20 @@ export default function ApplicationViews() {
 
   return (
     <div className="mainContainer">
-    <main>
-      <Switch>
-        {/* <Route path="/" exact>
+      <main>
+        <Switch>
+          {/* <Route path="/" exact>
           {isLoggedIn ? <SubscriptionList /> : <Redirect to="/welcome" />}
         </Route>
         <Route path="/tags">
           {isLoggedIn ?  <TagList /> : <Redirect to="/welcome" />}
         </Route> */}
 
-        <Route path="/feed" exact>
-          {isLoggedIn ? <SubscriptionList /> : <Redirect to="/welcome" />}
-        </Route>
+          <Route path="/feed" exact>
+            {isLoggedIn ? <SubscriptionList /> : <Redirect to="/welcome" />}
+          </Route>
 
-        {/* <Route path="/myposts" exact>
+          {/* <Route path="/myposts" exact>
           {isLoggedIn ? <MyPostList /> : <Redirect to="/welcome" />}
         </Route>
 
@@ -46,32 +45,35 @@ export default function ApplicationViews() {
           {isLoggedIn ? <PostDetails /> : <Redirect to="/welcome" />}
         </Route> */}
 
-        <Route path="/addPin" exact>
-          {isLoggedIn ? <AddPost /> : <Redirect to="/welcome" />}
-        </Route>
+          <Route path="/addPin" exact>
+            {isLoggedIn ? <AddPost /> : <Redirect to="/welcome" />}
+          </Route>
 
+          <Route path="/user/:userProfile" exact>
+            {isLoggedIn ? <UserProfilePage /> : <Redirect to="/welcome" />}
+          </Route>
 
-        <Route path="/user/:userProfile" exact>
-          {isLoggedIn ? <UserProfilePage /> : <Redirect to="/welcome" />}
-        </Route>
+          <Route path="/user/other/:id" exact>
+            {isLoggedIn ? <OtherUserProfilePage /> : <Redirect to="/welcome" />}
+          </Route>
 
-        <Route path="/user/other/:id" exact>
-          {isLoggedIn ? <OtherUserProfilePage /> : <Redirect to="/welcome" />}
-        </Route>
+          <Route path="/postcollection/:id" exact>
+            {isLoggedIn ? <PostCollectionList /> : <Redirect to="/welcome" />}
+          </Route>
 
-        <Route path="/welcome">
-          <LoginRegister/>
-        </Route>
+          <Route path="/welcome">
+            <LoginRegister />
+          </Route>
 
-        <Route path="/login">
-          <Login/>
-        </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
 
-        <Route path="/register" exact>
-          <Register/>
-        </Route>
+          <Route path="/register" exact>
+            <Register />
+          </Route>
 
-        {/* <Route path="/categories">
+          {/* <Route path="/categories">
           {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
         </Route>
 
@@ -87,9 +89,8 @@ export default function ApplicationViews() {
           {isLoggedIn && isAdmin ? <ReactionList/> : <Redirect to="/welcome" />}
         </Route>
          */}
-      </Switch>
-      
-    </main>
+        </Switch>
+      </main>
     </div>
   );
-};
+}

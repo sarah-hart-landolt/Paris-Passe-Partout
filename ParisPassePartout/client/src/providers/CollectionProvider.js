@@ -41,6 +41,16 @@ export function CollectionProvider(props) {
     );
   };
 
+  const getCollectionById = (id) => {
+    return getToken().then((token) => 
+    fetch(`/api/collection/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization:  `Bearer ${token}`
+      }
+    }).then((res) => res.json()))
+}
+
   const getCollectionsByUserId = (userProfileId) => {
     return getToken().then((token) => 
      fetch(`/api/collection/pins/${userProfileId}`, {
@@ -77,7 +87,7 @@ export function CollectionProvider(props) {
 
   return (
     <CollectionContext.Provider
-      value={{ collections, getCollections, addCollection, updateCollection, deleteCollection, getCollectionsByUserId }}
+      value={{ collections, getCollections, addCollection, updateCollection, deleteCollection, getCollectionsByUserId, getCollectionById }}
     >
       {props.children}
     </CollectionContext.Provider>
