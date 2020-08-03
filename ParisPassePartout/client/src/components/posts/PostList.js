@@ -12,7 +12,6 @@ const PostList = () => {
 
   useEffect(() => {
     getUserPosts();
-    // eslint-disable-next-line
   }, []);
 
   const refreshPosts= () => {

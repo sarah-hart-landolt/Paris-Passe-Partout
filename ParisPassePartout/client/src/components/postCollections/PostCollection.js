@@ -10,14 +10,15 @@ import {
   } from 'reactstrap';
 import { PostContext } from "../../providers/PostProvider";
 import { CategoryContext } from "../../providers/CategoryProvider";
-// import AddPostCollection from "./AddPostCollection";
+import { PostCollectionContext } from "../../providers/PostCollectionProvider";
 
 
 
 
-const PostCollection = ({post, rp}) => {
+const PostCollection = ({post, refresh, pc}) => {
     const [modal, setModal] = useState(false);
     const [collectionModal, setCollectionModal] = useState(false);
+    const { deletePostCollection } = useContext(PostCollectionContext)
 
     const [isShown, setIsShown] = useState(false);  
     const [editModal, setEditModal] = useState(false);
@@ -53,7 +54,7 @@ const PostCollection = ({post, rp}) => {
       phone: post.phone,
       website: post.website,
   
-      }).then(toggleEditModal).then(rp);
+      }).then(toggleEditModal).then(refresh);
     };
     
     return (
@@ -72,21 +73,13 @@ const PostCollection = ({post, rp}) => {
             <div className="pinButtons">
               <Button onClick={() =>
                 window.confirm(
-                  "Are you sure you wish to delete this pin?"
-                ) && deletePost(post.id).then(rp)
-              }>Delete</Button>
-               <Button onClick={toggleAddModal
-              }>Add to Collection</Button>
+                  "Are you sure you wish to remove this pin?"
+                ) && deletePostCollection(pc.id).then(refresh)
+              }>Remove from Collection</Button>
+             
             </div>
           )}
             </Card>
-            {/* <Modal isOpen={collectionModal} fade={false} toggle={toggleAddModal}>
-          <ModalHeader toggle={toggleAddModal}>Create a new collection!</ModalHeader>
-          <ModalBody>
-            <AddPostCollection post={post} toggle={toggleAddModal} refresh={rp} />
-          </ModalBody>
-          <ModalFooter></ModalFooter>
-        </Modal> */}
 
             <Modal
             isOpen={modal}

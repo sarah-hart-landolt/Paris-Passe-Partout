@@ -19,6 +19,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-google-places-autocomplete": "^2.3.0",
+    "react-map-gl": "^5.2.7",
     "react-onsenui": "^1.11.2",
     "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.2.0",

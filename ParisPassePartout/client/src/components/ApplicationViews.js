@@ -17,6 +17,7 @@ import { UserProfilePage } from "./userProfile/UserProfilePage";
 import { OtherUserProfilePage } from "./userProfile/OtherUserProfilePage";
 import SubscriptionList from "./feed/SubscriptionList";
 import PostCollectionList from "./postCollections/PostCollectionList";
+import {MyMap} from "./map/MyMap";
 
 export default function ApplicationViews() {
   const { isLoggedIn, isAdmin, isActivated } = useContext(UserProfileContext);
@@ -63,6 +64,10 @@ export default function ApplicationViews() {
 
           <Route path="/welcome">
             <LoginRegister />
+          </Route>
+
+          <Route path="/map">
+            <MyMap/>
           </Route>
 
           <Route path="/login">
