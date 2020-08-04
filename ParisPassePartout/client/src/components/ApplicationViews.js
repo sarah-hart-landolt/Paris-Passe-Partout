@@ -18,6 +18,7 @@ import { OtherUserProfilePage } from "./userProfile/OtherUserProfilePage";
 import SubscriptionList from "./feed/SubscriptionList";
 import PostCollectionList from "./postCollections/PostCollectionList";
 import {MyMap} from "./map/MyMap";
+import Post from "./posts/Post";
 
 export default function ApplicationViews() {
   const { isLoggedIn, isAdmin, isActivated } = useContext(UserProfileContext);
@@ -61,8 +62,8 @@ export default function ApplicationViews() {
           <Route path="/postcollection/:id" exact>
             {isLoggedIn ? <PostCollectionList /> : <Redirect to="/welcome" />}
           </Route>
-          <Route path="/editprofile" exact>
-            {isLoggedIn ? <PostCollectionList /> : <Redirect to="/welcome" />}
+          <Route path="/pin" exact>
+            {isLoggedIn ? <Post /> : <Redirect to="/welcome" />}
           </Route>
 
           <Route path="/welcome">

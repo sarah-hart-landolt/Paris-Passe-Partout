@@ -4,6 +4,7 @@ using ParisPassePartout.Data;
 using ParisPassePartout.Models;
 using ParisPassePartout.Repositories;
 using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
 
 namespace ParisPassePartout.Controllers
 {
@@ -12,6 +13,7 @@ namespace ParisPassePartout.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly UserProfileRepository _userProfileRepository;
+
         public UserProfileController(ApplicationDbContext context, IConfiguration configuration)
         {
             _userProfileRepository = new UserProfileRepository(context, configuration);
@@ -49,8 +51,19 @@ namespace ParisPassePartout.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Edit(UserProfile userProfile)
+        public IActionResult Edit(int id, UserProfile userProfile)
         {
+            var currentUser = GetCurrentUserProfile();
+
+            userProfile.FirebaseUserId = currentUser.FirebaseUserId;
+            userProfile.CreateDateTime = currentUser.CreateDateTime;
+            userProfile.Email = currentUser.Email;
+            userProfile.IsActivated = true;
+            if (id != userProfile.Id)
+            {
+                return BadRequest();
+            }
+
             _userProfileRepository.Update(userProfile);
             return Ok(userProfile);
         }
@@ -69,5 +82,12 @@ namespace ParisPassePartout.Controllers
 
             }
         }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
     }
 }

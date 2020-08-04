@@ -62,7 +62,7 @@ const AddOthersPost = ({post}) => {
                       <h3>{post.name}</h3>
                     </FormGroup>
                     <FormGroup>
-                      <div><img className="googlePhoto" src={post.imageLocation} /></div>
+                      <div><img className="googlePhoto2" src={post.imageLocation} /></div>
                     </FormGroup>
                     <FormGroup>
                       <Label for="captionText">Write your own caption</Label>

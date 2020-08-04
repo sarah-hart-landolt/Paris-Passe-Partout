@@ -23,7 +23,7 @@ const PostList = ({refresh}) => {
       <section>
         <CardColumns>
           <div>
-            {cuPosts.map((post) => {
+            {cuPosts.filter(p=>true).map((post) => {
               return <Post post={post} rp={refreshPosts} refresh={refresh}/>;
             })}
           </div>

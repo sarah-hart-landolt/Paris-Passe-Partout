@@ -58,11 +58,6 @@ export default function Header() {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/myposts">
-                    My Posts
-                  </NavLink>
-                </NavItem>
-                <NavItem>
                 <UPSearch />
                 </NavItem>
               </>
@@ -79,16 +74,16 @@ export default function Header() {
             {isLoggedIn && (
               <>
                 {" "}
-                <Dropdown
+                {/* <Dropdown
                   as={Link}
                   id="menuDropdown"
                   isOpen={dropdownOpen}
                   toggle={toggleDropdown}
                 >
-                  <DropdownToggle color="link" size="md" caret>
+                  <DropdownToggle color="link" size="md" caret> */}
                     <NavLink
                       tag={RRNavLink}
-                      to={`/userProfiles/${userProfile.id}`}
+                      to={`/user/${userProfile.displayName}`}
                       aria-current="page"
                       className="nav-link"
                       style={{ cursor: "pointer" }}
@@ -105,10 +100,12 @@ export default function Header() {
                         <img
                           alt=""
                           src="https://www.pngitem.com/pimgs/m/24-248235_user-profile-avatar-login-account-fa-user-circle.png"
+                          className="rounded-circle z-depth-0"
+                          style={{ height: "35px", padding: 0 }}
                         ></img>
                       )}
                     </NavLink>{" "}
-                  </DropdownToggle>
+                  {/* </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem header>Manage :</DropdownItem>
                     <DropdownItem>
@@ -120,7 +117,7 @@ export default function Header() {
                       <NavLink tag={RRNavLink} to="/editProfile">
                         Settings
                       </NavLink>
-                    </DropdownItem>
+                    </DropdownItem> */}
                     {/* <DropdownItem>
                       <NavLink tag={RRNavLink} to="/reactions">
                         Reactions
@@ -131,8 +128,8 @@ export default function Header() {
                         Users
                       </NavLink>
                     </DropdownItem> */}
-                  </DropdownMenu>
-                </Dropdown>
+                  {/* </DropdownMenu>
+                </Dropdown> */}
               </>
             )}
             {isLoggedIn && (

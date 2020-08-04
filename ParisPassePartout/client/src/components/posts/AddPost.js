@@ -34,10 +34,12 @@ const AddPost = () => {
       )),
       {
         types: ["establishment"],
-        componentRestrictions: { country: "fr" },
-        location: { lat: 48.864716, lng: 2.349014 },
-        radius: "500",
-      }
+        componentRestrictions: { country : "fr"},
+        location: "48.864716, 2.349014",
+        radius: "50",
+        strictbounds: true,
+
+    }
     );
     autocomplete.addListener("place_changed", onPlaceChanged);
 
@@ -56,7 +58,7 @@ const AddPost = () => {
     addPost({
       name: results.name,
       content: captionText,
-      imageLocation: results.photos[0].getUrl({
+      imageLocation: results.photos[0]?.getUrl({
         maxWidth: 12000,
         maxHeight: 12000,
       }),
@@ -95,7 +97,7 @@ const AddPost = () => {
                     <FormGroup>
                       <Label for="address">Address</Label>
                       <div>{results?.formatted_address}</div>
-                      <div>{results?.address_components[6].long_name}</div>
+                      <div>{results?.address_components[6]?.long_name}</div>
                       <div>{results?.business_status}</div>
                       <div>{results?.international_phone_number}</div>
                     </FormGroup>

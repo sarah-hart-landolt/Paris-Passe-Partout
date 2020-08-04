@@ -8,6 +8,12 @@
 
 }
 
+.googlePhoto2{
+    max-width: 300px;
+    max-height: auto;
+    transition: 0.1s;
+}
+
 #googlePin {
     min-width: 400px;
 }

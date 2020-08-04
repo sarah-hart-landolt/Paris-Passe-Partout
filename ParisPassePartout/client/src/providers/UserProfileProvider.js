@@ -75,7 +75,7 @@ export function UserProfileProvider(props) {
   };
 
   const getUserProfiles = () => {
-    getToken().then((token) =>
+    return getToken().then((token) =>
       fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -120,7 +120,7 @@ export function UserProfileProvider(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userProfile),
-      })
+      }) 
       .then(getUserProfiles)
     );
   };

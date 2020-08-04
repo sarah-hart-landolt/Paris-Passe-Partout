@@ -17,7 +17,7 @@ export default function Register() {
   const registerClick = (e) => {
     e.preventDefault();
     if (password && password !== confirmPassword) {
-      alert("Passwords don't match. Do better.");
+      alert("Passwords don't match.");
     } else {
       const userProfile = {
         firstName,
@@ -41,6 +41,7 @@ export default function Register() {
                   <Label htmlFor="firstName">First Name</Label>
                   <Input
                     id="firstName"
+                    required
                     type="text"
                     onChange={(e) => setFirstName(e.target.value)}
                   />
@@ -50,6 +51,7 @@ export default function Register() {
                   <Input
                     id="lastName"
                     type="text"
+                    required
                     onChange={(e) => setLastName(e.target.value)}
                   />
                 </FormGroup>
@@ -58,6 +60,7 @@ export default function Register() {
                   <Input
                     id="displayName"
                     type="text"
+                    required
                     onChange={(e) => setDisplayName(e.target.value)}
                   />
                 </FormGroup>
@@ -65,6 +68,7 @@ export default function Register() {
                   <Label for="email">Email</Label>
                   <Input
                     id="email"
+                    required
                     type="text"
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -81,6 +85,7 @@ export default function Register() {
                   <Label for="password">Password</Label>
                   <Input
                     id="password"
+                    required
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -90,6 +95,7 @@ export default function Register() {
                   <Input
                     id="confirmPassword"
                     type="password"
+                    required
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </FormGroup>
