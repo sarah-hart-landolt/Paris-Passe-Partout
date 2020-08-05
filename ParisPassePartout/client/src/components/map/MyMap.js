@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import "./MyMap.css"
 import { MDBBtn } from "mdbreact";
+import "mapbox-gl/dist/mapbox-gl.css"
 
 
 
@@ -58,6 +59,7 @@ export const MyMap = () => {
                     setSelectedPost(post);
                   }}>                  <i class={post.category.icon} aria-hidden="true"></i>
                   </MDBBtn> */}
+      <MDBBtn gradient="peach">Peach</MDBBtn>
 
                 <Button outline
                   className="marker-btn"

@@ -25,7 +25,7 @@ const PostList = ({refresh}) => {
         <CardColumns>
           <div>
             {cuPosts.filter(p=>true).map((post) => {
-              return <Post post={post} rp={refreshPosts} refresh={refresh}/>;
+              return <Post key={post.id} post={post} rp={refreshPosts} refresh={refresh}/>;
             })}
           </div>
         </CardColumns>

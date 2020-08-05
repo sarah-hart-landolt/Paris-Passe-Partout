@@ -5,7 +5,7 @@ import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Form, FormGroup, Mo
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText } from "reactstrap";
+   } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import PostList from "../posts/PostList";
 import classnames from "classnames";
@@ -49,6 +49,9 @@ export const UserProfilePage = () => {
   
   return (
     <MDBContainer className="pageContainer">
+      <MDBBtn gradient="peach">Peach</MDBBtn>
+      <MDBBtn color="light-green">Light-green</MDBBtn>
+
 
       <MDBRow className="profileContainer" >
 
@@ -102,9 +105,7 @@ Add Pin
 Add Collection
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
+        
               </DropdownMenu>
             </UncontrolledDropdown>
       </Nav>

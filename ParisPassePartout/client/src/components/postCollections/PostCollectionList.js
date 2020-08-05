@@ -38,7 +38,6 @@ const collectionId= parseInt(id)
        <MDBContainer className="pageContainer">
         <MDBRow>
       <section>
-        <Button onClick={toggle}>Create New Collection</Button>
         <Modal isOpen={modal} fade={false} toggle={toggle}>
           <ModalHeader toggle={toggle}>Create a new collection!</ModalHeader>
           <ModalBody>

@@ -6,6 +6,8 @@ import {
     ModalBody, Button
   } from 'reactstrap';
 import AddOthersPost from "./AddOthersPost";
+import { Link } from 'react-router-dom';
+
 
 const OtherUsersPost = ({post}) => {
     const [modal, setModal] = useState(false);
@@ -15,17 +17,17 @@ const OtherUsersPost = ({post}) => {
     const toggleAdd = () => setAddModal(!addModal);
 
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile"));
-    
+
     return (
         <>
             <Card onClick={toggleModal}>
                 <CardImg top width="100%" src={post.imageLocation} alt="Card image cap" />
                 <CardBody>
-                    <CardTitle><h4>{post.name}</h4></CardTitle>
-                    <CardSubtitle>Author: {post.userProfile.displayName}</CardSubtitle>
-                    {/* {(post.category.isDeleted === false) && 
-                    <CardText>Category: {post.category.name}</CardText>
-                    } */}
+                    <CardTitle><h4>{post.name}</h4></CardTitle> 
+                    <Link to={`/user/other/${post.userProfile.id}`} >
+                    <CardSubtitle>{post.userProfile.displayName}</CardSubtitle>
+                    </Link>
+                    <CardText>Category: {post.category?.name}</CardText>
                 </CardBody>
             </Card>
 
@@ -34,20 +36,24 @@ const OtherUsersPost = ({post}) => {
             modalTransition={{ timeout: 700 }}
             backdropTransition={{ timeout: 1300 }}
             toggle={toggleModal}
-            contentClassName="custom-modal-style-product"
           >
-            <ModalHeader toggle={toggleModal}>
+          <ModalHeader toggle={toggleModal}>
               {post.name}
           </ModalHeader>
-            <ModalBody>
+            <ModalBody             contentClassName="custom-modal-style"
+>
             <CardImg top width="100%" src={post.imageLocation} alt="Card image cap" />
-            <div>{post.website}</div>
-                      <div>{post.zipCode}</div>
+            <div>
+            
+            <div>{post.zipCode}</div>
+            {post.website}
                       <div>{post.address}</div>
                       <div>{post.content}</div>
                       {(post.userProfileId !== currentUser.id) && 
                     <Button onClick={toggleAdd}>Save to my pins!</Button>
                     }
+            </div>
+                     
             </ModalBody>
           </Modal>
 

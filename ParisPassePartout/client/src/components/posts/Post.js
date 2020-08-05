@@ -101,12 +101,12 @@ const Post = ({post, rp, refresh}) => {
             modalTransition={{ timeout: 700 }}
             backdropTransition={{ timeout: 1300 }}
             toggle={toggleModal}
-            contentClassName="custom-modal-style-product"
+            contentClassName="custom-modal-style"
           >
-            <ModalHeader toggle={toggleModal}>
+            <ModalHeader toggle={toggleModal} >
               {post.name}
           </ModalHeader>
-            <ModalBody>
+            <ModalBody contentClassName="custom-modal-style">
             <CardImg top width="100%" src={post.imageLocation} alt="Card image cap" />
             <div>{post.website}</div>
                       <div>{post.zipCode}</div>
@@ -122,7 +122,7 @@ const Post = ({post, rp, refresh}) => {
             modalTransition={{ timeout: 700 }}
             backdropTransition={{ timeout: 1300 }}
             toggle={toggleEditModal}
-            contentClassName="custom-modal-style-product"
+            contentClassName="custom-modal-style"
           >
             <ModalHeader toggle={toggleEditModal}>
               {post.name}

@@ -6,6 +6,7 @@ import * as firebase from "firebase/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import 'font-awesome/css/font-awesome.min.css';
+import 'mdbreact/dist/css/mdb.css';
 
 
 const firebaseConfig = {

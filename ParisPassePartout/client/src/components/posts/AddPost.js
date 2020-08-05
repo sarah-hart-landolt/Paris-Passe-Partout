@@ -35,8 +35,8 @@ const AddPost = () => {
       {
         types: ["establishment"],
         componentRestrictions: { country : "fr"},
-        location: "48.864716, 2.349014",
-        radius: "50",
+        location: "48.864716,2.349014",
+        radius: 500,
         strictbounds: true,
 
     }

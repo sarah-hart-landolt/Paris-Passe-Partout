@@ -29,7 +29,7 @@ export default function SubscribeButton({ userProfile }) {
     <Button onClick={() =>
       window.confirm(
         "Are you sure you wish to unsubscribe?") && deleteSubscription(subscription.id).then(refresh)}>UNSUBSCRIBE</Button> :
-    <Button onClick={subscribe}>Subscribe to Author</Button>
+    <Button onClick={subscribe}>SUBSCRIBE</Button>
 }
 
     

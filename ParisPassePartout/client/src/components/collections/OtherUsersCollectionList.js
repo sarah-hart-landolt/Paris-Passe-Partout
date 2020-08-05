@@ -8,10 +8,9 @@ import {
 } from "reactstrap";
 import { CardColumns } from "reactstrap";
 import { Collection } from "./Collection";
-import AddCollection from "./AddCollection";
 
 
-const MyCollectionsList = ({myCollections}) => {
+const OtherUsersCollectionsList = ({collections}) => {
 
 
   return (
@@ -20,7 +19,7 @@ const MyCollectionsList = ({myCollections}) => {
 
         <CardColumns>
           <div>
-            {myCollections?.map((collection) => {
+            {collections?.map((collection) => {
               return <Collection collection={collection}  />;
             })}
           </div>
@@ -31,4 +30,4 @@ const MyCollectionsList = ({myCollections}) => {
   );
 };
 
-export default MyCollectionsList;
+export default OtherUsersCollectionsList;

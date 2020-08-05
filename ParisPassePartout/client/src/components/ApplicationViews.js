@@ -1,18 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import LoginRegister from "./LoginRegister";
-// import PostList from "./posts/PostList";
-// import MyPostList from "./myPosts/MyPostsList";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
 import "../App.css";
-
-// import TagList from "./tag/TagList";
-// import { CategoryList } from "./categories/CategoryList";
-// import PostDetails from "./posts/PostDetails";
 import AddPost from "./posts/AddPost";
-// import { UserProfileList } from "./userProfiles/UserProfileList";
 import { UserProfilePage } from "./userProfile/UserProfilePage";
 import { OtherUserProfilePage } from "./userProfile/OtherUserProfilePage";
 import SubscriptionList from "./feed/SubscriptionList";
@@ -26,7 +19,8 @@ export default function ApplicationViews() {
   const userProfile = JSON.parse(sessionStorage.getItem("userProfile"));
 
   return (
-    <div className="mainContainer">
+    <div className="mainContainer"
+    >
       <main>
         <Switch>
           {/* <Route path="/" exact>

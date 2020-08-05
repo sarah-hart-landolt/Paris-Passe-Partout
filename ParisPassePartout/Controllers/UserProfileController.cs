@@ -53,12 +53,12 @@ namespace ParisPassePartout.Controllers
         [HttpPut("{id}")]
         public IActionResult Edit(int id, UserProfile userProfile)
         {
-            var currentUser = GetCurrentUserProfile();
+            //var currentUser = GetCurrentUserProfile();
 
-            userProfile.FirebaseUserId = currentUser.FirebaseUserId;
-            userProfile.CreateDateTime = currentUser.CreateDateTime;
-            userProfile.Email = currentUser.Email;
-            userProfile.IsActivated = true;
+            //userProfile.FirebaseUserId = currentUser.FirebaseUserId;
+            //userProfile.CreateDateTime = currentUser.CreateDateTime;
+            //userProfile.Email = currentUser.Email;
+            //userProfile.IsActivated = true;
             if (id != userProfile.Id)
             {
                 return BadRequest();

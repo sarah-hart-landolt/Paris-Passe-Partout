@@ -43,7 +43,8 @@ namespace ParisPassePartout.Repositories
                .SelectMany(s =>
                     _context.Post
                         .Where(p => p.UserProfileId == s.ProviderUserProfileId == true) 
-                        .Include(p => p.UserProfile))
+                        .Include(p => p.UserProfile)
+                        .Include(p=>p.Category))
                .ToList();
         }
 

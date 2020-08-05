@@ -120,7 +120,12 @@ export function UserProfileProvider(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userProfile),
-      }) 
+      }).then((resp) => resp.json())
+      .then((savedUserProfile) => {
+        console.log(savedUserProfile)
+        sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile));
+        setIsLoggedIn(true);
+      })
       .then(getUserProfiles)
     );
   };

@@ -17,11 +17,11 @@ export const Collection = ({ collection, refresh }) => {
       <Card className="pinCard" onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}inverse  >
                 
-      {collection.postCollectionList[0]? 
+      {collection.postCollectionList? 
        <CardImg
        className="img-fluid"
        width="100%"
-       src={collection.postCollectionList[0].post.imageLocation}
+       src={collection.postCollectionList[0]?.post.imageLocation}
        alt="Card image cap"
      />
      :

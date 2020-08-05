@@ -28,11 +28,5 @@
 }
 
 .modal-content.custom-modal-style{
-    width: 1000px;
-      height: 800px;
-      overflow: scroll;
-      position: fixed;
-       top: 2%;
-      left: 5%;
-      bottom: 5%
+  display: flex;
    }
