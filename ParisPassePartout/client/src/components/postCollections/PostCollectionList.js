@@ -10,6 +10,8 @@ import { CardColumns } from "reactstrap";
 import { CollectionContext } from "../../providers/CollectionProvider";
 import { useParams, useHistory } from "react-router-dom";
 import PostCollection from "./PostCollection";
+import {MDBContainer, MDBRow} from "mdbreact";
+
 
 
 
@@ -33,6 +35,8 @@ const collectionId= parseInt(id)
 
   return (
     <>
+       <MDBContainer className="pageContainer">
+        <MDBRow>
       <section>
         <Button onClick={toggle}>Create New Collection</Button>
         <Modal isOpen={modal} fade={false} toggle={toggle}>
@@ -50,6 +54,9 @@ const collectionId= parseInt(id)
           </div>
         </CardColumns>
       </section>
+      </MDBRow>
+      </MDBContainer>
+
     </>
   );
 };

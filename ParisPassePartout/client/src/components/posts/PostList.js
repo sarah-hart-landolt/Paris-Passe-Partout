@@ -21,6 +21,7 @@ const PostList = ({refresh}) => {
   return (
     <>
       <section>
+        
         <CardColumns>
           <div>
             {cuPosts.filter(p=>true).map((post) => {

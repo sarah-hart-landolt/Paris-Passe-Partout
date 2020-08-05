@@ -20,6 +20,8 @@ const AddOthersPost = ({post}) => {
   const { categories, getCategories } = useContext(CategoryContext);
   const category = useRef();
   const history = useHistory();
+  const hasTried= useRef();
+
 
 
   useEffect(() => {
@@ -28,6 +30,7 @@ const AddOthersPost = ({post}) => {
   }, []);
 
   const submitForm = (e) => {
+    const hasTriedInt = parseInt(hasTried.current.value);
     const categoryId = parseInt(category.current.value);
     e.preventDefault();
     addPost({
@@ -42,7 +45,9 @@ const AddOthersPost = ({post}) => {
       zipCode: post.zipCode,
       phone: post.phone,
       website: post.website,
-      originalPostId: post.id 
+      originalPostId: post.id,
+      hasTried: hasTriedInt,
+
 
     }).then(() => {
       history.push("/user/:userProfile")
@@ -88,6 +93,26 @@ const AddOthersPost = ({post}) => {
                               {category.name}
                             </option>
                           ))}
+                        </select>
+                      </fieldset>
+                    </FormGroup>
+                    <FormGroup>
+                      <fieldset className="input--addCategory">
+                        <select
+                          defaultValue=""
+                          ref={hasTried}
+                          name="category"
+                          id="category"
+                          className="form-control"
+                        >
+                          <option value="0">Have you already tried this place?</option>
+                          <option value={1}>
+                            yes{" "}
+                          </option>
+                          <option value={0}>
+                            no{" "}
+                          </option>
+                          ))
                         </select>
                       </fieldset>
                     </FormGroup>

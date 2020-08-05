@@ -19,9 +19,10 @@ import SubscriptionList from "./feed/SubscriptionList";
 import PostCollectionList from "./postCollections/PostCollectionList";
 import {MyMap} from "./map/MyMap";
 import Post from "./posts/Post";
+import AddCollection from "./collections/AddCollection";
 
 export default function ApplicationViews() {
-  const { isLoggedIn, isAdmin, isActivated } = useContext(UserProfileContext);
+  const { isLoggedIn } = useContext(UserProfileContext);
   const userProfile = JSON.parse(sessionStorage.getItem("userProfile"));
 
   return (
@@ -35,7 +36,7 @@ export default function ApplicationViews() {
           {isLoggedIn ?  <TagList /> : <Redirect to="/welcome" />}
         </Route> */}
 
-          <Route path="/feed" exact>
+          <Route path="/" exact>
             {isLoggedIn ? <SubscriptionList /> : <Redirect to="/welcome" />}
           </Route>
 
@@ -64,6 +65,10 @@ export default function ApplicationViews() {
           </Route>
           <Route path="/pin" exact>
             {isLoggedIn ? <Post /> : <Redirect to="/welcome" />}
+          </Route>
+
+          <Route path="/addcollection" exact>
+            {isLoggedIn ? <AddCollection /> : <Redirect to="/welcome" />}
           </Route>
 
           <Route path="/welcome">

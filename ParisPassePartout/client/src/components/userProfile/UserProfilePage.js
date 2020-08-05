@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import "./UserProfilePage.css";
-import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Form, FormGroup, Modal, ModalBody, ModalHeader, Label, Input, CardImg } from "reactstrap";
+import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Form, FormGroup, Modal, ModalBody, ModalHeader, Label, Input, CardImg, UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarText } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import PostList from "../posts/PostList";
 import classnames from "classnames";
@@ -28,6 +32,10 @@ export const UserProfilePage = () => {
     history.push(`/addPin`);
   };
 
+  const handleClick2 = () => {
+    history.push(`/addcollection`);
+  };
+
   useEffect(() => {
     getCollectionsByUserId(userProfile.id).then(setMyCollections);
     // eslint-disable-next-line
@@ -41,21 +49,26 @@ export const UserProfilePage = () => {
   
   return (
     <MDBContainer className="pageContainer">
-      <MDBRow>
-        <MDBCol md="3">
+
+      <MDBRow className="profileContainer" >
+
+        <div className="" md="3">
           <img
-            className="profilePic rounded-circle z-depth-0"
+            className="profilePic rounded-circle z-depth-0 _4dMfM"
             src={userProfile.imageLocation}
           />
-        </MDBCol>
-        <MDBCol md="6">
-          <div>{userProfile.displayName}</div>
-          <div>{userProfile.fullName}</div>
+        </div>
+        <div md="6" className="profileInfo">
+          <div className="nameContainer"><h1 className="upName">{userProfile.displayName}</h1>
+</div>
+          <div className="profileTitle">{userProfile.fullName}</div>
           <div>{userProfile.description}</div>
-        </MDBCol>
+                <Button onClick={toggleModal}>Edit Profile</Button>
+        </div>
+       
       </MDBRow>
-      <Button onClick={toggleModal}>Edit Profile</Button>
-      <Button onClick={handleClick}>Add Pin</Button>
+
+    
       <Nav tabs>
         <NavItem>
           <NavLink
@@ -77,7 +90,25 @@ export const UserProfilePage = () => {
             My Collections
           </NavLink>
         </NavItem>
+        <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav >
+              <svg class="gUZ pBj U9O kVc" height="20" width="20" viewBox="0 0 24 24" aria-hidden="true" aria-label="" role="img"><path d="M22 10h-8V2a2 2 0 0 0-4 0v8H2a2 2 0 0 0 0 4h8v8a2 2 0 0 0 4 0v-8h8a2 2 0 0 0 0-4"></path></svg>
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem onClick={handleClick}>
+Add Pin
+                </DropdownItem>
+                <DropdownItem onClick={handleClick2}>
+Add Collection
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>
+                  Reset
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
       </Nav>
+     
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <MDBRow>

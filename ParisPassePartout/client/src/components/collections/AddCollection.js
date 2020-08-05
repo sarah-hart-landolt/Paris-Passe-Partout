@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { CollectionContext } from "../../providers/CollectionProvider";
+import { useHistory } from "react-router-dom";
+
 
 
 
 const AddCollection = ({toggle, refresh}) => {
     const [collectionName, setNameText] = useState();
     const {addCollection} = useContext(CollectionContext);
+    const history = useHistory();
+
     
 
 
@@ -16,9 +20,8 @@ const AddCollection = ({toggle, refresh}) => {
     addCollection({
       name: collectionName
   })
-  .then(refresh);
-  toggle()
-  };
+  .then(refresh).then(() => {
+    history.push("/user/:userProfile")  })};
    
 
   return (

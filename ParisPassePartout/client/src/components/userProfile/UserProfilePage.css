@@ -1,6 +1,8 @@
 .profilePic{
     height: 150px;
     width: 150px;
+    width: auto;
+
 }
 
 .PageContainer{
@@ -14,4 +16,34 @@
     -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
     position: relative;
+}
+
+.upName {
+    font-weight: 300;
+    font-size: 28px;
+    margin-bottom: 20px;
+    line-height: 32px;
+}
+
+.profileContainer {
+    padding-top: 50px;
+    justify-content: center;
+}
+
+.profileInfo {
+    padding-top: 20px;
+    padding-left: 50px;
+    text-align: left;
+}
+
+.profileTitle{
+    font-weight: bold;
+}
+.nameContainer{
+    display: flex;
+}
+
+.profileEdit{
+    
+    margin-left: 2rem;
 }

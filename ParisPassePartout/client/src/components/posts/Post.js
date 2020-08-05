@@ -71,6 +71,7 @@ const Post = ({post, rp, refresh}) => {
                 <CardBody>
                     <CardTitle><h4>{post.name}</h4></CardTitle>
                     <CardSubtitle>Author: {post.userProfile.displayName}</CardSubtitle>
+
                     {(post.category.isDeleted === false) && 
                     <CardText>Category: {post.category.name}</CardText>
                     }
