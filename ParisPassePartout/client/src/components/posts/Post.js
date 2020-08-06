@@ -144,7 +144,7 @@ const Post = ({post, rp, refresh}) => {
                     <FormGroup>
                       <fieldset className="input--addCategory">
                         <select
-                          defaultValue=""
+                          defaultValue={post.categoryId}
                           ref={category}
                           name="category"
                           id="category"
@@ -163,7 +163,7 @@ const Post = ({post, rp, refresh}) => {
                     <FormGroup>
                       <fieldset className="input--addCategory">
                         <select
-                          defaultValue=""
+                          defaultValue={post.hasTried=== 0 ? 0 : 1}
                           ref={hasTried}
                           name="category"
                           id="category"

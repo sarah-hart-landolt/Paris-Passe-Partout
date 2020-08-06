@@ -23,24 +23,11 @@ export default function ApplicationViews() {
     >
       <main>
         <Switch>
-          {/* <Route path="/" exact>
-          {isLoggedIn ? <SubscriptionList /> : <Redirect to="/welcome" />}
-        </Route>
-        <Route path="/tags">
-          {isLoggedIn ?  <TagList /> : <Redirect to="/welcome" />}
-        </Route> */}
+  
 
           <Route path="/" exact>
             {isLoggedIn ? <SubscriptionList /> : <Redirect to="/welcome" />}
           </Route>
-
-          {/* <Route path="/myposts" exact>
-          {isLoggedIn ? <MyPostList /> : <Redirect to="/welcome" />}
-        </Route>
-
-        <Route path="/posts/:id" exact>
-          {isLoggedIn ? <PostDetails /> : <Redirect to="/welcome" />}
-        </Route> */}
 
           <Route path="/addPin" exact>
             {isLoggedIn ? <AddPost /> : <Redirect to="/welcome" />}
@@ -80,23 +67,6 @@ export default function ApplicationViews() {
           <Route path="/register" exact>
             <Register />
           </Route>
-
-          {/* <Route path="/categories">
-          {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/userProfiles" exact>
-          {isLoggedIn && isAdmin ? <UserProfileList /> : <Redirect to="/welcome" />}
-        </Route>
-
-        <Route path="/userProfiles/list/deactivated" exact>
-          {isLoggedIn && isAdmin ? <DeactivatedList/> : <Redirect to="/welcome" />}
-        </Route>
-
-        <Route path="/reactions" exact>
-          {isLoggedIn && isAdmin ? <ReactionList/> : <Redirect to="/welcome" />}
-        </Route>
-         */}
         </Switch>
       </main>
     </div>

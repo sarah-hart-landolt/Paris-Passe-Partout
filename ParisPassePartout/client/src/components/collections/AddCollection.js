@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { CollectionContext } from "../../providers/CollectionProvider";
 import { useHistory } from "react-router-dom";
+import {MDBContainer, MDBRow} from "mdbreact";
+
 
 
 
@@ -25,7 +27,8 @@ const AddCollection = ({toggle, refresh}) => {
    
 
   return (
-      
+    <MDBContainer className="pageContainer">
+    <MDBRow>
     <Form onSubmit={submitForm}>
           <FormGroup>
             <Label for="collectionName">Name Your Collection</Label>
@@ -37,6 +40,8 @@ const AddCollection = ({toggle, refresh}) => {
           <Button color="secondary" onClick={toggle}>Cancel</Button>
           </FormGroup>
           </Form>
+    </MDBRow>
+    </MDBContainer>
         
         
   );

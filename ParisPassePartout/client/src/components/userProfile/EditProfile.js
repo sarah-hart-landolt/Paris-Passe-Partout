@@ -32,6 +32,7 @@ const EditProfile = ({ toggle }) => {
           <Input
             id="captionText"
             type="textarea"
+            defaultValue={userProfile.description}
             onChange={(e) => setCaptionText(e.target.value)}
           />
         </FormGroup>

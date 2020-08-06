@@ -1,17 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
-} from "reactstrap";
+import React from "react";
 import { CardColumns } from "reactstrap";
 import { Collection } from "./Collection";
-import AddCollection from "./AddCollection";
 
 
-const MyCollectionsList = ({myCollections}) => {
+const MyCollectionsList = ({myCollections, refresh}) => {
 
 
   return (
@@ -21,7 +13,7 @@ const MyCollectionsList = ({myCollections}) => {
         <CardColumns>
           <div>
             {myCollections?.map((collection) => {
-              return <Collection collection={collection}  />;
+              return <Collection collection={collection} refresh={refresh} />;
             })}
           </div>
           

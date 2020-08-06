@@ -2,13 +2,9 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { PostContext } from "../../providers/PostProvider";
 import {
-  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle,  Modal,
+  CardImg,  Modal,
   ModalHeader,
-  ModalBody, Button, Form, ModalFooter,
-  FormGroup,
-  Label,
-  Input
+  ModalBody
 } from 'reactstrap';
 import "./MyMap.css"
 import { MDBBtn } from "mdbreact";
@@ -52,24 +48,17 @@ export const MyMap = () => {
                 longitude={post.longitude}
               >
 
-                      {/* <Button color={post.category.color}><i class={post.category.icon} aria-hidden="true"></i></Button> */}
-
-                {/* <MDBBtn  color="pink"className="marker-btn" onClick={e => {
-                    e.preventDefault();
-                    setSelectedPost(post);
-                  }}>                  <i class={post.category.icon} aria-hidden="true"></i>
-                  </MDBBtn> */}
-      <MDBBtn gradient="peach">Peach</MDBBtn>
-
-                <Button outline
+                <MDBBtn 
+                color={post.category.color}
+                gradient={post.category.color}
                   className="marker-btn"
                   onClick={e => {
                     e.preventDefault();
                     setSelectedPost(post);
                   }}
                 >
-                  <i class={post.category.icon} aria-hidden="true"></i>
-                </Button>
+                  <i class={post.category.icon} id="mapIcon" aria-hidden="true"></i>
+                </MDBBtn>
               </Marker>
             ))}
     
@@ -77,21 +66,16 @@ export const MyMap = () => {
               <Popup 
                 latitude={selectedPost.latitude}
                 longitude={selectedPost.longitude}
-                // onClick={toggleModal}
-                // onClose={() => {
-                //   setSelectedPost(null);
-                //   toggleModal()
-                // }}
+                onClick={toggleModal}
+                onClose={() => {
+                  setSelectedPost(null);
+                }}
               >
                 <div>
                   <h4>{selectedPost.name}</h4>
                   <p>{selectedPost.category.name}</p>
                   <p>{(selectedPost?.hasTried === true) ? "has tried" : "want to try"} </p>
                   <p><img style={{ height: "100px", padding: 0 }}src={selectedPost.imageLocation}/></p>
-                  <Button onClick={() => {
-                  setSelectedPost(null);
-                }} >exit</Button>
-                  <Button onClick={toggleModal}>details</Button>
 
                 </div>
               </Popup>

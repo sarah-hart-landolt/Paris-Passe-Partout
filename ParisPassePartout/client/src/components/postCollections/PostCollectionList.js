@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -8,7 +7,7 @@ import {
 } from "reactstrap";
 import { CardColumns } from "reactstrap";
 import { CollectionContext } from "../../providers/CollectionProvider";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PostCollection from "./PostCollection";
 import {MDBContainer, MDBRow} from "mdbreact";
 
@@ -47,7 +46,7 @@ const collectionId= parseInt(id)
 
         <CardColumns>
           <div>
-            {oneCollection?.postCollectionList.map((pc) => {
+            {oneCollection?.postCollectionList?.map((pc) => {
               return <PostCollection pc={pc} post={pc.post} refresh={refresh} />;
             })}
           </div>

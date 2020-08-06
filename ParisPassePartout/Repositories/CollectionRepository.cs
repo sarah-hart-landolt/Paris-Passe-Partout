@@ -21,6 +21,8 @@ namespace ParisPassePartout.Repositories
             return _context.Collection
                 .OrderBy(pc => pc.Name)
                 .Include(p => p.UserProfile)
+                .Include(c => c.PostCollectionList)
+                .ThenInclude(pc => pc.Post)
                 .ToList();
         }
 

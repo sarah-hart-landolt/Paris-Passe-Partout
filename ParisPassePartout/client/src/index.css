@@ -12,21 +12,12 @@ code {
     monospace;
 }
 
-/* .App {
-  max-height: 736px !important;
-  width: 414px;
-  margin: auto;
-} */
 
 .navBar{
-  /* max-height: 736px !important;
-  width: 414px; */
   margin: auto;
-  background-color: steelblue;
+  background-color: #f1f1f1 !important;
 }
-/* 
+
 .bg-light {
-  overflow: hidden !important; 
-    position: fixed !important;
-   bottom: 0 !important;
-} */
+  background-color: #f5f5f5 !important
+}

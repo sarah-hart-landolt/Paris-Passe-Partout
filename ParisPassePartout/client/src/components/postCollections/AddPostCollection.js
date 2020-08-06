@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Button } from 'reactstrap';
 import { CollectionContext } from "../../providers/CollectionProvider";
 import { PostCollectionContext } from "../../providers/PostCollectionProvider";
 

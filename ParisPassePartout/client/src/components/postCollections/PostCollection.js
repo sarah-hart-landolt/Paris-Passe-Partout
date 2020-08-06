@@ -1,9 +1,9 @@
 import React, { useContext, useState, useRef, useEffect } from "react"
 import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle,  Modal,
+    Card, CardImg, CardBody,
+    CardTitle, Modal,
     ModalHeader,
-    ModalBody, Button, Form, ModalFooter,
+    ModalBody, Button, Form, 
     FormGroup,
     Label,
     Input,
@@ -23,11 +23,12 @@ const PostCollection = ({post, refresh, pc}) => {
     const [isShown, setIsShown] = useState(false);  
     const [editModal, setEditModal] = useState(false);
     const [captionText, setCaptionText] = useState();
-    const { deletePost, editPost } = useContext(PostContext);
+    const { editPost } = useContext(PostContext);
     const { categories, getCategories } = useContext(CategoryContext);
     const category = useRef();
     const toggleModal = () => setModal(!modal);
     const toggleAddModal = () => setCollectionModal(!collectionModal);
+    const currentUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
     const toggleEditModal = () => setEditModal(!editModal);
 
@@ -54,7 +55,7 @@ const PostCollection = ({post, refresh, pc}) => {
       phone: post.phone,
       website: post.website,
   
-      }).then(toggleEditModal).then(refresh);
+      }).then(toggleEditModal).then(refresh());
     };
     
     return (
@@ -64,12 +65,10 @@ const PostCollection = ({post, refresh, pc}) => {
                 <CardImg onClick={toggleModal} className="googlePhoto" top width="100%" src={post.imageLocation} alt="Card image cap" />
                 <CardBody>
                     <CardTitle><h4>{post.name}</h4></CardTitle>
-                    {/* <CardSubtitle>Author: {post.userProfile.displayName}</CardSubtitle>
-                    {(post.category.isDeleted === false) && 
+                    <CardSubtitle>Author: {post.userProfile.displayName}</CardSubtitle>
                     <CardText>Category: {post.category.name}</CardText>
-                    } */}
                 </CardBody>
-                {isShown && (
+                {isShown && ((currentUser === post.userProfileId) &&
             <div className="pinButtons">
               <Button onClick={() =>
                 window.confirm(

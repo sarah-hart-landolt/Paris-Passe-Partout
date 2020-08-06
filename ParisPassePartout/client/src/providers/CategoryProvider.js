@@ -49,18 +49,6 @@ export const CategoryProvider = ( props ) => {
         })
     }    
 
-    // const deleteCategory = (id) => {
-    //     getToken().then((token) =>
-    //         fetch(apiUrl + `${id}`, {
-    //             method: "DELETE",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json"
-    //             },
-    //         })
-    //         .then(getCategories)
-    //     )
-    // }
 
 
     return (

@@ -49,10 +49,7 @@ export const UserProfilePage = () => {
   
   return (
     <MDBContainer className="pageContainer">
-      <MDBBtn gradient="peach">Peach</MDBBtn>
-      <MDBBtn color="light-green">Light-green</MDBBtn>
-
-
+  
       <MDBRow className="profileContainer" >
 
         <div className="" md="3">
