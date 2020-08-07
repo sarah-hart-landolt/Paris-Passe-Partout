@@ -47,7 +47,7 @@ const collectionId= parseInt(id)
         <CardColumns>
           <div>
             {oneCollection?.postCollectionList?.map((pc) => {
-              return <PostCollection pc={pc} post={pc.post} refresh={refresh} />;
+              return <PostCollection pc={pc} post={pc.post} refresh={refresh} oneCollection={oneCollection} />;
             })}
           </div>
         </CardColumns>

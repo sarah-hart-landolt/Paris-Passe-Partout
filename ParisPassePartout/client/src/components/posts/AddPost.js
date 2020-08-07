@@ -118,7 +118,7 @@ const AddPost = () => {
                       <Label for="photo">Photo</Label>
                       <img
                         className="googlePhoto"
-                        // src={((results?.photos[0].html_attributions[0]).split("\""))[2]}
+                        src={results?.photos[0].getUrl}
                       />
                     </FormGroup>
                     <FormGroup>
@@ -170,8 +170,6 @@ const AddPost = () => {
             </Card>
           </div>
         </div>
-        <div>{results?.geometry.location.lat()}</div>
-        <div>{results?.geometry.location.lng()}</div>
       </div>
     </div>
   );
