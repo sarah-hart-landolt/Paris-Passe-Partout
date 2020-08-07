@@ -58,10 +58,10 @@ const AddPost = () => {
     addPost({
       name: results.name,
       content: captionText,
-      imageLocation: results.photos[0]?.getUrl({
+      imageLocation: results.photos ? results.photos[0]?.getUrl({
         maxWidth: 12000,
         maxHeight: 12000,
-      }),
+      }) : "https://images.squarespace-cdn.com/content/v1/53d8799de4b0873b56402a1e/1539727201459-34LSZLF35YG320OJ7JH0/ke17ZwdGBToddI8pDm48kDHPSfPanjkWqhH6pl6g5ph7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kT3PXaDTw6fk-7hFv8qtuO9cQCsc0TvODI6VkiZtuEfknLoiRIu-kWfCHsqWGB43w/Muse%CC%81ePicasso.png?format=1000w",
       categoryId: categoryId,
       longitude: results.geometry.location.lng(),
       latitude: results.geometry.location.lat(),
@@ -116,10 +116,15 @@ const AddPost = () => {
                     <FormGroup>
                       <Label for="photo">Photo</Label>
                       <br></br>
+                      {results?.photos?
                       <img
-                        className="googlePhoto2"
-                        src={results?.photos[0]?.getUrl()}
-                      />
+                      className="googlePhoto2"
+                      src={results?.photos[0]?.getUrl()}
+                    /> 
+                    :
+                    <p>No image available</p>
+                      }
+                    
                     </FormGroup>
                     <FormGroup>
                       <fieldset className="input--addCategory">
