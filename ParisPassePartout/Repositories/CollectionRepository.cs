@@ -19,18 +19,21 @@ namespace ParisPassePartout.Repositories
         public List<Collection> GetAll()
         {
             return _context.Collection
-                .OrderBy(pc => pc.Name)
-                .Include(p => p.UserProfile)
+                .OrderBy(c => c.Name)
+                .Include(c => c.UserProfile)
                 .Include(c => c.PostCollectionList)
                 .ThenInclude(pc => pc.Post)
+                .ThenInclude(post => post.Category)
                 .ToList();
         }
 
         public Collection GetById(int id)
         {
             return _context.Collection
+                     .Include(c=>c.UserProfile)
                      .Include(c => c.PostCollectionList)
                       .ThenInclude(pc => pc.Post)
+                      .ThenInclude(post => post.Category)
                       .FirstOrDefault(c => c.Id == id);
 
                           

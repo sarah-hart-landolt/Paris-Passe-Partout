@@ -54,8 +54,6 @@ namespace ParisPassePartout.Repositories
             return _context.Post
                            .Include(p => p.UserProfile)
                            .Include(p => p.Category)
-                           //.Include(p => p.PostTagList)
-                           //.ThenInclude(pt => pt.Tag)
                            .FirstOrDefault(p => p.Id == id);
         }
 
@@ -74,10 +72,10 @@ namespace ParisPassePartout.Repositories
         public void Delete(int id)
         {
             var post = GetById(id);
-            foreach (var postReaction in _context.PostReaction
-               .Where(pr => pr.PostId == post.Id))
+            foreach (var postCollection in _context.PostCollection
+               .Where(pc => pc.PostId == post.Id))
             {
-                _context.PostReaction.Remove(postReaction);
+                _context.PostCollection.Remove(postCollection);
             }
             _context.Post.Remove(post);
             _context.SaveChanges();

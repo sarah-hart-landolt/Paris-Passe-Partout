@@ -67,7 +67,7 @@ const AddPost = () => {
       latitude: results.geometry.location.lat(),
       address: results.formatted_address,
       status: results.business_status,
-      zipCode: results.address_components[6].long_name,
+      zipCode: results.address_components[6]?.long_name,
       phone: results.international_phone_number,
       website: results.website,
       hasTried: hasTriedInt,
@@ -75,7 +75,6 @@ const AddPost = () => {
       history.push("/user/:userProfile");
     });
   };
-
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -116,9 +115,10 @@ const AddPost = () => {
                     </FormGroup>
                     <FormGroup>
                       <Label for="photo">Photo</Label>
+                      <br></br>
                       <img
-                        className="googlePhoto"
-                        // src={((results?.photos[0].html_attributions[0]).split("\""))[2]}
+                        className="googlePhoto2"
+                        src={results?.photos[0]?.getUrl()}
                       />
                     </FormGroup>
                     <FormGroup>
@@ -170,8 +170,6 @@ const AddPost = () => {
             </Card>
           </div>
         </div>
-        <div>{results?.geometry.location.lat()}</div>
-        <div>{results?.geometry.location.lng()}</div>
       </div>
     </div>
   );

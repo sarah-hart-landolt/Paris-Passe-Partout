@@ -16,6 +16,7 @@ import {
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import "../index.css";
 import UPSearch from "./userProfile/UPSearch";
+import parispassepartout6 from "./parispassepartout6.png";
 
 export default function Header() {
   const { isLoggedIn, logout } = useContext(UserProfileContext);
@@ -26,10 +27,13 @@ export default function Header() {
 
   return (
     <div className="navBar">
-      <Navbar color="light" light expand="md">
+      <Navbar light expand="md">
         <NavbarBrand tag={RRNavLink} to="/">
-          Paris Passe Partout
-        </NavbarBrand>
+        <img
+                      src={parispassepartout6}
+                      style={{ height: "75px", padding: 0 }}
+                      alt=""
+                    />        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -108,7 +112,7 @@ export default function Header() {
                     <img
                       src={userProfile.imageLocation}
                       className="rounded-circle z-depth-0"
-                      style={{ height: "35px", padding: 0 }}
+                      style={{ height: "55px", padding: 0 }}
                       alt=""
                     />
                   ) : (
@@ -131,7 +135,7 @@ export default function Header() {
                     to="/welcome"
                     aria-current="page"
                     className="nav-link"
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", padding: 20 }}
                     onClick={logout}
                   >
                     Logout

@@ -7,6 +7,8 @@ import {
     FormGroup,
     Label,
     Input,
+    CardSubtitle,
+    CardText
   } from 'reactstrap';
 import { PostContext } from "../../providers/PostProvider";
 import { CategoryContext } from "../../providers/CategoryProvider";
@@ -15,7 +17,7 @@ import { PostCollectionContext } from "../../providers/PostCollectionProvider";
 
 
 
-const PostCollection = ({post, refresh, pc}) => {
+const PostCollection = ({post, refresh, pc, oneCollection}) => {
     const [modal, setModal] = useState(false);
     const [collectionModal, setCollectionModal] = useState(false);
     const { deletePostCollection } = useContext(PostCollectionContext)
@@ -65,10 +67,10 @@ const PostCollection = ({post, refresh, pc}) => {
                 <CardImg onClick={toggleModal} className="googlePhoto" top width="100%" src={post.imageLocation} alt="Card image cap" />
                 <CardBody>
                     <CardTitle><h4>{post.name}</h4></CardTitle>
-                    <CardSubtitle>Author: {post.userProfile.displayName}</CardSubtitle>
+                    <CardSubtitle>Author: {oneCollection.userProfile.displayName}</CardSubtitle>
                     <CardText>Category: {post.category.name}</CardText>
                 </CardBody>
-                {isShown && ((currentUser === post.userProfileId) &&
+                {isShown && ((currentUser.id === post.userProfileId) &&
             <div className="pinButtons">
               <Button onClick={() =>
                 window.confirm(
