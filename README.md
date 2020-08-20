@@ -1,4 +1,4 @@
-# Paris-Passe-Partout : Full Stack (C# in .NET core & React )
+# Paris-Passe-Partout : Full Stack (C# in .NET Core & React )
 
 Voila! Paris-Passe-Partout: a full stack social media app, created for lovers of Paris to curate and keep track of their favorite places in the city while also following and saving others' recommendations and itineraries. It's a vetted, curated Yelp, Google Maps, Pinterest and Instagram combined. "Passe-partout" is a French word meaning "master key" that has been adopted into the English language. With this app, users quickly have access to the master key of Paris, unlocking "les bonnes adresses" of the famous city..
 
