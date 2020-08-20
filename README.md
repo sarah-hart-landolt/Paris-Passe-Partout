@@ -1,4 +1,4 @@
-# Paris-Passe-Partout
+# Paris-Passe-Partout : Full Stack (React, C#)
 ![](./ParisPassePartoutDesktop.png)
 Final Capstone : Full Stack Application
 
