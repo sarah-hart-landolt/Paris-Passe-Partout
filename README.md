@@ -1,3 +1,3 @@
 # Paris-Passe-Partout
-![](./parispassepartoutcomputer.png)
+![](./ParisPassePartoutDesktop.png)
 Final Capstone : Full Stack Application
