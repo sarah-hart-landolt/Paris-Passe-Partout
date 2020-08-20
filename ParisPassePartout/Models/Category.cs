@@ -14,9 +14,11 @@ namespace ParisPassePartout.Models
         [Required]
         public string Name { get; set; }
 
+        public string Icon { get; set; }
+        
+        public string Color { get; set; }
         public List<Post> PostList { get; set; }
 
-        public Boolean IsDeleted { get; set; }
     }
 }
     

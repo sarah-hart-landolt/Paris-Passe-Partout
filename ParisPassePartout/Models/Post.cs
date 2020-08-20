@@ -11,24 +11,10 @@ namespace ParisPassePartout.Models
     public class Post
     {
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Enter a Title")]
-        public string Title { get; set; }
-
-        [Required(ErrorMessage = "Enter a Post")]
+        public string Name { get; set; }
         public string Content { get; set; }
-
-        [Required(ErrorMessage = "Upload an Image")]
-        [DisplayName("Header Image URL")]
         public string ImageLocation { get; set; }
-
         public DateTime CreateDateTime { get; set; }
-
-        [Required(ErrorMessage = "Select a Publication Date")]
-        [DisplayName("Published")]
-        [DataType(DataType.Date)]
-        public DateTime? PublishDateTime { get; set; }
-
 
         [Required]
         [DisplayName("Category")]
@@ -38,14 +24,21 @@ namespace ParisPassePartout.Models
         [DisplayName("Author")]
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
+        public int OriginalPostId { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+        public string Address{ get; set; }
+        public int ZipCode { get; set; }
+        public string Status { get; set; }
+        public string Phone { get; set; }
+        public string Website { get; set; }
+        public Boolean HasTried { get; set; }
 
-        public float Longitude { get; set; }
-        public float Latitude { get; set; }
 
         //public List<Comment> CommentList { get; set; }
         //public List<PostTag> PostTagList { get; set; }
 
-        [NotMapped]
-        public bool IsCurrentUsers { get; set; } = false;
+        //[NotMapped]
+        //public bool IsCurrentUsers { get; set; } = false;
     }
 }

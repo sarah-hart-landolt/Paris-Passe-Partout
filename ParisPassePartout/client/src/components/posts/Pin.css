@@ -1,0 +1,32 @@
+.googlePhoto{
+    /* max-width: 300px;
+    max-height: auto; */
+    transition: 0.1s;
+}
+.googlePhoto:hover{
+    filter: opacity(.5);
+
+}
+
+.googlePhoto2{
+    max-width: 300px;
+    max-height: auto;
+    transition: 0.1s;
+}
+
+#googlePin {
+    min-width: 400px;
+}
+
+.pinCard {
+    position: relative;
+}
+
+.pinButtons {
+    position: absolute;
+    top: 10px;
+}
+
+.modal-content.custom-modal-style{
+  display: flex;
+   }

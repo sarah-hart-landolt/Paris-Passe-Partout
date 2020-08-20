@@ -35,6 +35,7 @@ export default function Login() {
                   <Input
                     id="email"
                     type="text"
+                    required
                     onChange={(e) => {
                       e.preventDefault()
                       setEmail(e.target.value)
@@ -46,6 +47,7 @@ export default function Login() {
                   <Label for="password">Password</Label>
                   <Input
                     id="password"
+                    required
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
                     onKeyDown={(e) => e.keyCode === 13 ? onKeyDown() : null}

@@ -9,16 +9,10 @@ export function UserProfileProvider(props) {
   const apiUrl = "/api/userprofile";
   const userProfile = JSON.parse(sessionStorage.getItem("userProfile"));
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
-  const [isAdmin, setAdmin] = useState(false);
-  const [isActivated, setIsActivated] = useState(false);
-
-  useEffect(() => {
-    if (isLoggedIn && userProfile.userTypeId === 1) {
-      setAdmin(true);
-    }
-  });
+ 
 
   const [userProfiles, setUserProfiles] = useState([]);
+
 
   const [isFirebaseReady, setIsFirebaseReady] = useState(false);
   useEffect(() => {
@@ -51,7 +45,6 @@ export function UserProfileProvider(props) {
       .then(() => {
         sessionStorage.clear();
         setIsLoggedIn(false);
-        setAdmin(false);
       });
   };
 
@@ -82,7 +75,7 @@ export function UserProfileProvider(props) {
   };
 
   const getUserProfiles = () => {
-    getToken().then((token) =>
+    return getToken().then((token) =>
       fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -127,10 +120,26 @@ export function UserProfileProvider(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userProfile),
+      }).then((resp) => resp.json())
+      .then((savedUserProfile) => {
+        console.log(savedUserProfile)
+        sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile));
+        setIsLoggedIn(true);
       })
       .then(getUserProfiles)
     );
   };
+
+  const searchProfiles = (searchString) => {
+    return getToken().then((token) =>
+        fetch(`/api/userprofile/search?searchString=${searchString}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => res.json()));
+};
 
   return (
     <UserProfileContext.Provider
@@ -141,10 +150,10 @@ export function UserProfileProvider(props) {
         register,
         getToken,
         getUserProfileById,
-        isAdmin,
         getUserProfiles,
         userProfiles,
         editUserProfile,
+        searchProfiles
       }}
     >
       {isFirebaseReady ? (

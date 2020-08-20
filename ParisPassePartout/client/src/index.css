@@ -12,10 +12,15 @@ code {
     monospace;
 }
 
-.App {
-  max-height: 736px;
-  width: 414px;
+
+.navBar{
   margin: auto;
+  color: #f1f1f1 !important;
 }
 
-
+.bg-light {
+  background-color: #f5f5f5 !important;
+}
+.loginImage{
+  max-width: 1000px;
+}

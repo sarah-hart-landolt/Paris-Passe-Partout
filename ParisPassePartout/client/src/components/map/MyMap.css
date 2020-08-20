@@ -1,0 +1,12 @@
+.marker-btn{
+    border-radius: 50px !important;
+    height: 38px;
+    width: 38px;
+}
+.btn{
+    padding: .75em !important;
+}
+
+#mapIcon{
+    font-size: 10px ;
+}

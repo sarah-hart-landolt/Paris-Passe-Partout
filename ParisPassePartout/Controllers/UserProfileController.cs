@@ -3,18 +3,22 @@ using System;
 using ParisPassePartout.Data;
 using ParisPassePartout.Models;
 using ParisPassePartout.Repositories;
+using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
 
-namespace Tabloid.Controllers
+namespace ParisPassePartout.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
     {
         private readonly UserProfileRepository _userProfileRepository;
-        public UserProfileController(ApplicationDbContext context)
+
+        public UserProfileController(ApplicationDbContext context, IConfiguration configuration)
         {
-            _userProfileRepository = new UserProfileRepository(context);
+            _userProfileRepository = new UserProfileRepository(context, configuration);
         }
+          
 
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetUserProfile(string firebaseUserId)
@@ -47,10 +51,43 @@ namespace Tabloid.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Edit(UserProfile userProfile)
+        public IActionResult Edit(int id, UserProfile userProfile)
         {
+            //var currentUser = GetCurrentUserProfile();
+
+            //userProfile.FirebaseUserId = currentUser.FirebaseUserId;
+            //userProfile.CreateDateTime = currentUser.CreateDateTime;
+            //userProfile.Email = currentUser.Email;
+            //userProfile.IsActivated = true;
+            if (id != userProfile.Id)
+            {
+                return BadRequest();
+            }
+
             _userProfileRepository.Update(userProfile);
             return Ok(userProfile);
         }
+
+        [HttpGet("search")]
+
+        public IActionResult Search(string searchString)
+        {
+            if (String.IsNullOrEmpty(searchString))
+            {
+                return Ok(_userProfileRepository.GetAll());
+            }
+            else
+            {
+                return Ok(_userProfileRepository.Search(searchString));
+
+            }
+        }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
     }
 }

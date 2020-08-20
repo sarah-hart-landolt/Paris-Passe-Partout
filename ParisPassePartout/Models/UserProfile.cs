@@ -39,6 +39,8 @@ namespace ParisPassePartout.Models
         [Required]
         public Boolean IsActivated { get; set; }
 
+        public string Description { get; set; }
+
         public string FullName
         {
             get
