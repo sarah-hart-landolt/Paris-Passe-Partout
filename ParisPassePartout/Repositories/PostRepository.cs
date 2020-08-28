@@ -43,7 +43,7 @@ namespace ParisPassePartout.Repositories
             DateTime today = DateTime.Now;
             return _context.Post
                            .Include(p => p.UserProfile)
-                           //.Include(p => p.CommentList)
+                           .Include(p => p.CommentList)
                            .Include(p => p.Category)
                            .Where(p => p.UserProfileId == id)
                            .OrderByDescending(p => p.CreateDateTime)
@@ -55,7 +55,7 @@ namespace ParisPassePartout.Repositories
         {
             return _context.Post
                            .Include(p => p.UserProfile)
-                           //.Include(p => p.CommentList)
+                           .Include(p => p.CommentList)
                            .Include(p => p.Category)
                            .FirstOrDefault(p => p.Id == id);
         }
