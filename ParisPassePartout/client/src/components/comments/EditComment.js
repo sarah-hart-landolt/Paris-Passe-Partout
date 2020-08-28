@@ -9,7 +9,7 @@ export const EditComment=({comment, toggle, refreshPost})=> {
   const submitForm = (e) => {
     e.preventDefault();
     editComment({id: comment.id, content: editCommentText? editCommentText : comment.content, postId:comment.postId })
-    refreshPost()
+    .then(refreshPost)
     toggle()
   };
 
