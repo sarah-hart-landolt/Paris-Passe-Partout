@@ -13,6 +13,7 @@ import PostCollectionList from "./postCollections/PostCollectionList";
 import {MyMap} from "./map/MyMap";
 import Post from "./posts/Post";
 import AddCollection from "./collections/AddCollection";
+import PostDetails from "./posts/PostDetails";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -47,6 +48,10 @@ export default function ApplicationViews() {
           <Route path="/pin" exact>
             {isLoggedIn ? <Post /> : <Redirect to="/welcome" />}
           </Route>
+
+          <Route path="/pins/:id" exact>
+          {isLoggedIn ? <PostDetails /> : <Redirect to="/welcome" />}
+        </Route>
 
           <Route path="/addcollection" exact>
             {isLoggedIn ? <AddCollection /> : <Redirect to="/welcome" />}

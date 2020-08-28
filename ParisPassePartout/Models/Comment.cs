@@ -18,10 +18,6 @@ namespace ParisPassePartout.Models
 
         public UserProfile UserProfile { get; set; }
 
-
-        [Required(ErrorMessage = "Enter a Subject")]
-        public string Subject { get; set; }
-
         [Required(ErrorMessage = "Enter a comment")]
         public string Content { get; set; }
 

@@ -9,6 +9,7 @@ import { CategoryProvider } from "./providers/CategoryProvider";
 import { SubscriptionProvider } from "./providers/SubscriptionProvider";
 import { CollectionProvider } from "./providers/CollectionProvider";
 import { PostCollectionProvider } from "./providers/PostCollectionProvider";
+import { CommentProvider } from "./providers/CommentProvider";
 
 function App() {
   return (
@@ -16,16 +17,18 @@ function App() {
       <Router>
         <UserProfileProvider>
           <PostProvider>
-            <CollectionProvider>
-              <PostCollectionProvider>
-                <SubscriptionProvider>
-                  <CategoryProvider>
-                    <Header />
-                    <ApplicationViews />
-                  </CategoryProvider>
-                </SubscriptionProvider>
-              </PostCollectionProvider>
-            </CollectionProvider>
+            <CommentProvider>
+              <CollectionProvider>
+                <PostCollectionProvider>
+                  <SubscriptionProvider>
+                    <CategoryProvider>
+                      <Header />
+                      <ApplicationViews />
+                    </CategoryProvider>
+                  </SubscriptionProvider>
+                </PostCollectionProvider>
+              </CollectionProvider>
+            </CommentProvider>
           </PostProvider>
         </UserProfileProvider>
       </Router>
