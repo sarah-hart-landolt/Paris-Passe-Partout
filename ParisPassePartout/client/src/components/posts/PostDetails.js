@@ -33,7 +33,6 @@ const PostDetails = () => {
   const { id } = useParams();
   const [modal, setModal] = useState(false);
   const [postModal, setPostModal] = useState(false);
-  const [isShown, setIsShown] = useState(false);
 
   const history = useHistory();
   const toggleModal = () => setModal(!modal);
@@ -58,10 +57,10 @@ const PostDetails = () => {
   }, []);
 
   const postId = parseInt(id);
-//   useEffect(() => {
-//     getPRByPostId(postId).then(setPostReactions);
-//     // eslint-disable-next-line
-//   }, []);
+  //   useEffect(() => {
+  //     getPRByPostId(postId).then(setPostReactions);
+  //     // eslint-disable-next-line
+  //   }, []);
 
   const refreshPost = () => {
     getPostById(id).then(setOnePost);
@@ -105,11 +104,11 @@ const PostDetails = () => {
   };
 
   const formattedDate = moment(onePost.publishDateTime).format("MM/DD/YYYY");
-//   const sortedComments = onePost.commentList.sort(
-//     (a, b) =>
-//       new Date(b.createDateTime).getTime() -
-//       new Date(a.createDateTime).getTime()
-//   );
+  const sortedComments = onePost.commentList.sort(
+    (a, b) =>
+      new Date(b.createDateTime).getTime() -
+      new Date(a.createDateTime).getTime()
+  );
   //   const postReactionObject = postReactions
   //     .filter((pr) => pr.userProfileId === userProfile.id)
   //     .find((pr) => pr.userProfileId === userProfile.id);
@@ -133,29 +132,46 @@ const PostDetails = () => {
 
   return (
     <>
+      <MDBContainer className="pageContainer">
+        <h1>{onePost.name}</h1>
+        <MDBRow>
+          <MDBCol>
+            <Card className="pinCard">
+              <CardImg
+                className="googlePhoto"
+                top
+                width="100%"
+                src={onePost.imageLocation}
+                alt="Card image cap"
+              />
+              <CardBody>
+                <CardTitle>
+                  <h4>{onePost.name}</h4>
+                </CardTitle>
+                <CardSubtitle>
+                  Author: {onePost.userProfile.displayName}
+                </CardSubtitle>
 
-    <MDBContainer className="pageContainer">
-    <h1>{onePost.name}</h1>
-    <MDBRow>
-      <MDBCol>
-
-        <Card className="pinCard">
-                <CardImg className="googlePhoto" top width="100%" src={onePost.imageLocation} alt="Card image cap" />
-                <CardBody>
-                    <CardTitle><h4>{onePost.name}</h4></CardTitle>
-                    <CardSubtitle>Author: {onePost.userProfile.displayName}</CardSubtitle>
-
-                    <CardText>Category: {onePost.category.name}</CardText>
-                    
-                </CardBody>
+                <CardText>Category: {onePost.category.name}</CardText>
+                <div>{onePost.zipCode}</div>
+                <div>{onePost.address}</div>
+                <div>{onePost.content}</div>
+              </CardBody>
             </Card>
-            </MDBCol>
-            <MDBCol>
-        <div className="authorContainer">
-          Written by:{" "}
-          <span className="author">{onePost.userProfile.displayName}</span>
-        </div>
-{/*      
+          </MDBCol>
+          <MDBCol>
+              <div className="authorContainer">
+                Written by:{" "}
+                <span className="author">
+                  {onePost.userProfile.displayName}
+                </span>
+              </div>
+                      <div className="publishedDate">
+              Published: {formattedDate}
+              {editAndDelete()}
+            </div>
+             
+            {/*      
           <div className="allReactionsContainer">
             <div className="reactionContainer">
               {reactions.map((react) => (
@@ -218,7 +234,7 @@ const PostDetails = () => {
                 </div>
               ))}
           </div> */}
-          
+
             <Button
               outline
               color="secondary"
@@ -227,55 +243,50 @@ const PostDetails = () => {
             >
               Add Comment
             </Button>
+            <Card className="text-left">
+              <div className="mt-10">
+                <h3 className="postsHeader">Comments</h3>
+              </div>
+              <CardBody>
+                {sortedComments.length ? (
+                  sortedComments.map((comment) => (
+                    <Comment
+                      refreshPost={refreshPost}
+                      key={comment.id}
+                      comment={comment}
+                    />
+                  ))
+                ) : (
+                  <div className="alert alert-secondary mt-1" role="alert">
+                    {" "}
+                    No comments were found.
+                  </div>
+                )}
+                <br />
+              </CardBody>
+            </Card>
 
-          <div className="publishedDate">
-            Published: {formattedDate}
-            {editAndDelete()}
-          </div>
-
-          {/* <Card className="text-left">
-            <div className="mt-10">
-              <h3 className="postsHeader">Comments</h3>
-            </div>
-            <CardBody>
-              {sortedComments.length ? (
-                sortedComments.map((comment) => (
-                  <Comment
-                    refreshPost={refreshPost}
-                    key={comment.id}
-                    comment={comment}
-                  />
-                ))
-              ) : (
-                <div className="alert alert-secondary mt-1" role="alert">
-                  {" "}
-                  No comments were found.
-                </div>
-              )}
-              <br />
-            </CardBody>
-          </Card> */}
-          <Modal
-            isOpen={modal}
-            modalTransition={{ timeout: 700 }}
-            backdropTransition={{ timeout: 1300 }}
-            toggle={toggleModal}
-            contentClassName="custom-modal-style-product"
-          >
-            <ModalHeader toggle={toggleModal}>
-              Add a comment to "{onePost.title}"
-            </ModalHeader>
-            <ModalBody>
-              <CommentForm
-                refreshPost={refreshPost}
-                postId={id}
-                toggle={toggleModal}
-              />
-            </ModalBody>
-          </Modal>
+            <Modal
+              isOpen={modal}
+              modalTransition={{ timeout: 700 }}
+              backdropTransition={{ timeout: 1300 }}
+              toggle={toggleModal}
+              contentClassName="custom-modal-style-product"
+            >
+              <ModalHeader toggle={toggleModal}>
+                Add a comment to "{onePost.title}"
+              </ModalHeader>
+              <ModalBody>
+                <CommentForm
+                  refreshPost={refreshPost}
+                  postId={id}
+                  toggle={toggleModal}
+                />
+              </ModalBody>
+            </Modal>
           </MDBCol>
-          </MDBRow>
-        </MDBContainer>
+        </MDBRow>
+      </MDBContainer>
     </>
   );
 };

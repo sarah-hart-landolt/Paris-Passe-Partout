@@ -98,28 +98,6 @@ const Post = ({post, rp, refresh}) => {
           </ModalBody>
           <ModalFooter></ModalFooter>
         </Modal>
-
-            {/* <Modal
-            isOpen={modal}
-            modalTransition={{ timeout: 700 }}
-            backdropTransition={{ timeout: 1300 }}
-            toggle={toggleModal}
-            contentClassName="custom-modal-style"
-          >
-            <ModalHeader toggle={toggleModal} >
-              {post.name}
-          </ModalHeader>
-            <ModalBody contentClassName="custom-modal-style">
-            <CardImg top width="100%" src={post.imageLocation} alt="Card image cap" />
-            <div>{post.website}</div>
-                      <div>{post.zipCode}</div>
-                      <div>{post.address}</div>
-                      <div>{post.content}</div>
-                      <Button onClick={toggleEditModal}>Edit</Button>
-
-                 
-            </ModalBody>
-          </Modal> */}
           <Modal
             isOpen={editModal}
             modalTransition={{ timeout: 700 }}
