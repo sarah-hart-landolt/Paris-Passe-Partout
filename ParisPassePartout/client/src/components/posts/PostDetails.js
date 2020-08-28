@@ -274,7 +274,7 @@ const PostDetails = () => {
               contentClassName="custom-modal-style-product"
             >
               <ModalHeader toggle={toggleModal}>
-                Add a comment to "{onePost.title}"
+                Add a comment to "{onePost.name}"
               </ModalHeader>
               <ModalBody>
                 <CommentForm
