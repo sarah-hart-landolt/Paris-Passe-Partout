@@ -8,7 +8,8 @@ import {
     Label,
     Input,
   } from 'reactstrap';
-import "./Pin.css"
+import "./Pin.css";
+import { useParams, useHistory } from "react-router-dom";
 import { PostContext } from "../../providers/PostProvider";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import AddPostCollection from "../postCollections/AddPostCollection";
@@ -19,6 +20,7 @@ import AddPostCollection from "../postCollections/AddPostCollection";
 const Post = ({post, rp, refresh}) => {
     const [modal, setModal] = useState(false);
     const [collectionModal, setCollectionModal] = useState(false);
+    const history = useHistory();
 
     const [isShown, setIsShown] = useState(false);  
     const [editModal, setEditModal] = useState(false);
@@ -28,12 +30,13 @@ const Post = ({post, rp, refresh}) => {
     const category = useRef();
     const hasTried= useRef();
 
-    const toggleModal = () => setModal(!modal);
     const toggleAddModal = () => setCollectionModal(!collectionModal);
 
     const toggleEditModal = () => setEditModal(!editModal);
 
-
+    const postDetails= () => {
+      history.push(`/pins/${post.id}`);
+    }
 
     useEffect(() => {
       getCategories();
@@ -67,7 +70,7 @@ const Post = ({post, rp, refresh}) => {
         <>
             <Card className="pinCard" onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}>
-                <CardImg onClick={toggleModal} className="googlePhoto" top width="100%" src={post.imageLocation} alt="Card image cap" />
+                <CardImg onClick={postDetails} className="googlePhoto" top width="100%" src={post.imageLocation} alt="Card image cap" />
                 <CardBody>
                     <CardTitle><h4>{post.name}</h4></CardTitle>
                     <CardSubtitle>Author: {post.userProfile.displayName}</CardSubtitle>
@@ -96,7 +99,7 @@ const Post = ({post, rp, refresh}) => {
           <ModalFooter></ModalFooter>
         </Modal>
 
-            <Modal
+            {/* <Modal
             isOpen={modal}
             modalTransition={{ timeout: 700 }}
             backdropTransition={{ timeout: 1300 }}
@@ -116,7 +119,7 @@ const Post = ({post, rp, refresh}) => {
 
                  
             </ModalBody>
-          </Modal>
+          </Modal> */}
           <Modal
             isOpen={editModal}
             modalTransition={{ timeout: 700 }}

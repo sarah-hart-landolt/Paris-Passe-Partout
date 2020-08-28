@@ -34,8 +34,7 @@ namespace ParisPassePartout.Models
         public string Website { get; set; }
         public Boolean HasTried { get; set; }
 
-
-        //public List<Comment> CommentList { get; set; }
+        public List<Comment> CommentList { get; set; }
         //public List<PostTag> PostTagList { get; set; }
 
         //[NotMapped]
