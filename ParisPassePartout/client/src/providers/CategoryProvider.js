@@ -7,7 +7,8 @@ export const CategoryProvider = ( props ) => {
     const apiUrl = "/api/category/";
     const { getToken } = useContext(UserProfileContext)
     const [categories, setCategories] = useState([])
-    
+ 
+
     const getCategories = () => {
         getToken().then((token) =>
         fetch(apiUrl, {

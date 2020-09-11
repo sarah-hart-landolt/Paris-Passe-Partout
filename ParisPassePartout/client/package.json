@@ -20,10 +20,11 @@
     "react-dom": "^16.13.1",
     "react-google-places-autocomplete": "^2.3.0",
     "react-map-gl": "^5.2.7",
+    "react-multi-select-component": "^3.0.2",
     "react-onsenui": "^1.11.2",
     "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^3.4.3",
     "reactstrap": "^8.5.1"
   },
   "scripts": {
