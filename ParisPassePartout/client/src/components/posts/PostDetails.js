@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { PostContext } from "../../providers/PostProvider";
 import { useParams, useHistory } from "react-router-dom";
 import "./Pin.css";
@@ -12,8 +12,6 @@ import {
   ModalHeader,
   ModalBody,
   ListGroup,
-  ListGroupItem,
-  Badge,
   CardImg,
   CardText,
   CardTitle,
@@ -26,13 +24,28 @@ import {
 } from "reactstrap";
 import { CommentForm } from "../comments/CommentForm";
 import { Comment } from "../comments/Comment";
+import { CategoryContext } from "../../providers/CategoryProvider";
+
 
 const PostDetails = () => {
   const { getPostById, deletePost } = useContext(PostContext);
+  const [editModal, setEditModal] = useState(false);
+  const [captionText, setCaptionText] = useState();
   const [onePost, setOnePost] = useState();
   const { id } = useParams();
   const [modal, setModal] = useState(false);
   const [postModal, setPostModal] = useState(false);
+  const { editPost } = useContext(PostContext);
+  const { categories, getCategories } = useContext(CategoryContext);
+  const category = useRef();
+  const hasTried= useRef();
+  const toggleEditModal = () => setEditModal(!editModal);
+
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
 
   const history = useHistory();
   const toggleModal = () => setModal(!modal);
@@ -85,7 +98,7 @@ const PostDetails = () => {
             style={{ cursor: "pointer" }}
             onClick={(e) => {
               e.preventDefault();
-              togglePostModal();
+              toggleEditModal();
             }}
           ></i>
           <br></br>
@@ -129,6 +142,30 @@ const PostDetails = () => {
   //     }
   //     return emojiCountArray;
   //   };
+
+  const submitEditForm = (e) => {
+    const categoryId = parseInt(category.current.value);
+    const hasTriedInt = parseInt(hasTried.current.value);
+
+    e.preventDefault();
+    editPost({
+    id: onePost.id,
+    name: onePost.name,
+    content: captionText? captionText : onePost.content,
+    imageLocation: onePost.imageLocation,
+    categoryId: categoryId? categoryId: onePost.categoryId,
+    longitude: onePost.longitude,
+    latitude: onePost.latitude,
+    address: onePost.address, 
+    status: onePost.status,
+    zipCode: onePost.zipCode,
+    phone: onePost.phone,
+    website: onePost.website,
+    hasTried: hasTriedInt,
+
+
+    }).then(toggleEditModal).then(refreshPost);
+  };
 
   return (
     <>
@@ -287,6 +324,77 @@ const PostDetails = () => {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
+
+      <Modal
+            isOpen={editModal}
+            modalTransition={{ timeout: 700 }}
+            backdropTransition={{ timeout: 1300 }}
+            toggle={toggleEditModal}
+            contentClassName="custom-modal-style"
+          >
+            <ModalHeader toggle={toggleEditModal}>
+              {onePost.name}
+          </ModalHeader>
+            <ModalBody>
+            <CardImg top width="100%" src={onePost.imageLocation} alt="Card image cap" />
+            <Form onSubmit={submitEditForm}>
+                  <fieldset>
+                    <FormGroup>
+                      <Label for="captionText">Edit caption</Label>
+                      <Input
+                        required
+                        id="captionText"
+                        type="textarea"
+                        defaultValue={onePost.content}
+                        onChange={(e) => setCaptionText(e.target.value)}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <fieldset className="input--addCategory">
+                        <select
+                          defaultValue={onePost.categoryId}
+                          ref={category}
+                          name="category"
+                          id="category"
+                          className="form-control"
+                          required
+                        >
+                          <option value="0">Select a Category</option>
+                          {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                              {category.name}
+                            </option>
+                          ))}
+                        </select>
+                      </fieldset>
+                    </FormGroup>
+                    <FormGroup>
+                      <fieldset className="input--addCategory">
+                        <select
+                          defaultValue={onePost.hasTried=== 0 ? 0 : 1}
+                          ref={hasTried}
+                          name="category"
+                          id="category"
+                          className="form-control"
+                        >
+                          <option value="0">Have you already tried this place?</option>
+                          <option value={1}>
+                            yes{" "}
+                          </option>
+                          <option value={0}>
+                            no{" "}
+                          </option>
+                          ))
+                        </select>
+                      </fieldset>
+                    </FormGroup>
+                    <FormGroup>
+                      <Button>Save Edit</Button>
+                    </FormGroup>
+                  </fieldset>
+                </Form>
+            </ModalBody>
+          </Modal>
     </>
   );
 };

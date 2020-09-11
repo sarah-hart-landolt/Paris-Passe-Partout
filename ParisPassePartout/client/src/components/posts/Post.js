@@ -1,12 +1,9 @@
-import React, { useContext, useState, useRef, useEffect } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle,  Modal,
     ModalHeader,
-    ModalBody, Button, Form, ModalFooter,
-    FormGroup,
-    Label,
-    Input,
+    ModalBody, Button, ModalFooter,
   } from 'reactstrap';
 import "./Pin.css";
 import { useParams, useHistory } from "react-router-dom";
@@ -21,50 +18,17 @@ const Post = ({post, rp, refresh}) => {
     const [modal, setModal] = useState(false);
     const [collectionModal, setCollectionModal] = useState(false);
     const history = useHistory();
-
     const [isShown, setIsShown] = useState(false);  
-    const [editModal, setEditModal] = useState(false);
-    const [captionText, setCaptionText] = useState();
     const { deletePost, editPost } = useContext(PostContext);
-    const { categories, getCategories } = useContext(CategoryContext);
-    const category = useRef();
-    const hasTried= useRef();
+    
 
     const toggleAddModal = () => setCollectionModal(!collectionModal);
 
-    const toggleEditModal = () => setEditModal(!editModal);
 
     const postDetails= () => {
       history.push(`/pins/${post.id}`);
     }
 
-    useEffect(() => {
-      getCategories();
-    }, []);
-
-    const submitEditForm = (e) => {
-      const categoryId = parseInt(category.current.value);
-      const hasTriedInt = parseInt(hasTried.current.value);
-
-      e.preventDefault();
-      editPost({
-      id: post.id,
-      name: post.name,
-      content: captionText? captionText : post.content,
-      imageLocation: post.imageLocation,
-      categoryId: categoryId? categoryId: post.categoryId,
-      longitude: post.longitude,
-      latitude: post.latitude,
-      address: post.address, 
-      status: post.status,
-      zipCode: post.zipCode,
-      phone: post.phone,
-      website: post.website,
-      hasTried: hasTriedInt,
-
-  
-      }).then(toggleEditModal).then(rp);
-    };
     
     return (
         <>
@@ -98,78 +62,7 @@ const Post = ({post, rp, refresh}) => {
           </ModalBody>
           <ModalFooter></ModalFooter>
         </Modal>
-          <Modal
-            isOpen={editModal}
-            modalTransition={{ timeout: 700 }}
-            backdropTransition={{ timeout: 1300 }}
-            toggle={toggleEditModal}
-            contentClassName="custom-modal-style"
-          >
-            <ModalHeader toggle={toggleEditModal}>
-              {post.name}
-          </ModalHeader>
-            <ModalBody>
-            <CardImg top width="100%" src={post.imageLocation} alt="Card image cap" />
-            <Form onSubmit={submitEditForm}>
-                  <fieldset>
-                    <FormGroup>
-                      <Label for="captionText">Edit caption</Label>
-                      <Input
-                        required
-                        id="captionText"
-                        type="textarea"
-                        defaultValue={post.content}
-                        onChange={(e) => setCaptionText(e.target.value)}
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <fieldset className="input--addCategory">
-                        <select
-                          defaultValue={post.categoryId}
-                          ref={category}
-                          name="category"
-                          id="category"
-                          className="form-control"
-                          required
-                        >
-                          <option value="0">Select a Category</option>
-                          {categories.map((category) => (
-                            <option key={category.id} value={category.id}>
-                              {category.name}
-                            </option>
-                          ))}
-                        </select>
-                      </fieldset>
-                    </FormGroup>
-                    <FormGroup>
-                      <fieldset className="input--addCategory">
-                        <select
-                          defaultValue={post.hasTried=== 0 ? 0 : 1}
-                          ref={hasTried}
-                          name="category"
-                          id="category"
-                          className="form-control"
-                        >
-                          <option value="0">Have you already tried this place?</option>
-                          <option value={1}>
-                            yes{" "}
-                          </option>
-                          <option value={0}>
-                            no{" "}
-                          </option>
-                          ))
-                        </select>
-                      </fieldset>
-                    </FormGroup>
-                    <FormGroup>
-                      <Button>Save Edit</Button>
-                    </FormGroup>
-                  </fieldset>
-                </Form>
-            </ModalBody>
-          </Modal>
-
-       
+         
         </>
 
     )
